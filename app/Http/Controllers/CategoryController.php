@@ -16,9 +16,24 @@ class CategoryController extends Controller
     function store(Request $request)
     {
         $category = new tbl_category();
+        $path = public_path('uplode/category');
+        $categoryImage = $request->file('categoryImage');
+        $categoryImageName = "";
+        if ($categoryImage) {
+            $categoryImageName = time() ."category.png";
+            $categoryImage->move($path, $categoryImageName);
+        }
+
+        $categoryBannerImage = $request->file('categoryBannerImage');
+        $categoryBannerImageName = "";
+        if ($categoryBannerImage) {
+            $categoryBannerImageName = time() . "banner.png";
+            $categoryBannerImage->move($path, $categoryBannerImageName);
+        } 
+
         $category->category_name = $request->categoryName;
-        $category->category_image = $request->categoryImage;
-        $category->category_banner_image = $request->categoryBannerImage;
+        $category->category_image = $categoryImageName;
+        $category->category_banner_image = $categoryBannerImageName;
         $category->save();
         return redirect("/admin/category");
     }

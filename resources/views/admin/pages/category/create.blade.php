@@ -5,7 +5,7 @@
 <!-- Modal -->
 <div class="modal fade " id="addCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <form action="/admin/category" method="post">
+        <form action="/admin/category" method="post" enctype="multipart/form-data">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">

@@ -15,7 +15,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/admin/subCategory" method="post">
+                <form action="/admin/subCategory" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row mx-2">
                         <div class="form-group has-success">

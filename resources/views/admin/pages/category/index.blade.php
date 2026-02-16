@@ -36,10 +36,10 @@
                                     <tr>
                                         <td>{{ $data->category_id }}</td>
                                         <td>{{ $data->category_name }}</td>
-                                        <td><img src="{{ asset('admin/img/examples/example1.jpeg') }}" alt=""
+                                        <td><img src="{{ asset('uplode/category/' . $data->category_image) }}" alt=""
                                                 style="height:100px; width:100px" class="rounded-4"></td>
                                         <td>
-                                            <img src="{{ asset('admin/img/examples/example1.jpeg') }}" alt=""
+                                            <img src="{{ asset('uplode/category/' . $data->category_banner_image) }}" alt=""
                                                 style="height:100px; width:100px" class="rounded-4">
                                         </td>
 

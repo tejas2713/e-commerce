@@ -20,9 +20,16 @@ class SubCategoryController extends Controller
     function store(Request $request)
     {
         $subCategory = new tbl_subcategory();
+        $path = public_path('uplode/subCategory');
+        $subCategoryImage = $request->file('subCategoryImage');
+        $subCategoryImageName = "";
+        if ($subCategoryImage) {
+            $subCategoryImageName = time() . "subCategory.png";
+            $subCategoryImage->move($path, $subCategoryImageName);
+        }
         $subCategory->sub_category_name = $request->subCategoryName;
         $subCategory->category_id = $request->categoryId;
-        $subCategory->sub_category_image = $request->subCategoryImage;
+        $subCategory->sub_category_image = $subCategoryImageName;
         $subCategory->save();
         return redirect("/admin/subCategory");
 

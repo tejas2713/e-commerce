@@ -35,7 +35,7 @@
                                         <td>{{$data->sub_category_id}}</td>
                                         <td>{{$data->sub_category_name}}</td>
                                         <td>{{$data->category_id}}</td>
-                                        <td><img src="{{ asset('admin/img/examples/example1.jpeg') }}" alt=""
+                                        <td><img src="{{ asset('uplode/subCategory/' . $data->sub_category_image) }}" alt=""
                                                 style="height:100px; width:100px"></td>
 
                                         <td>
@@ -71,7 +71,7 @@
 
     @include("admin.pages.subCategory.edit")
     <script>
-        function editData(sub_category_id, sub_category_name,category_id,sub_category_image) {
+        function editData(sub_category_id, sub_category_name, category_id, sub_category_image) {
             console.log(sub_category_id);
             console.log(sub_category_name);
             console.log(category_id);
