@@ -13,7 +13,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
 
 
-    Route::get('/', [AdminController::class, 'dashbord']);
+    Route::get('/admin/dashboard', [AdminController::class, 'dashbord']);
 
     Route::get('/admin/category', [CategoryController::class, 'index']);
     Route::post('/admin/category', [CategoryController::class, 'store']);
@@ -46,15 +46,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/product/delete', [ProductController::class, 'remove']);
 
 });
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/master', [App\Http\Controllers\WebsiteController::class, 'index']);
-Route::get('/master/shop', [App\Http\Controllers\WebsiteController::class, 'shop']);
-Route::get('/master/shoppingCard', [App\Http\Controllers\WebsiteController::class, 'shopingCard']);
-Route::get('/master/shopDetails', [App\Http\Controllers\WebsiteController::class, 'shopDetails']);
-Route::get('/master/chackout', [App\Http\Controllers\WebsiteController::class, 'chackout']);
-Route::get('/master/about', [App\Http\Controllers\WebsiteController::class, 'about']);
-Route::get('/master/contact', [App\Http\Controllers\WebsiteController::class, 'contact']);
-Route::get('/master/blog', [App\Http\Controllers\WebsiteController::class, 'blog']);
-Route::get('/master/blogDetails', [App\Http\Controllers\WebsiteController::class, 'blogDetails']);
+Route::get('/', [App\Http\Controllers\WebsiteController::class, 'index']);
+Route::get('/shop', [App\Http\Controllers\WebsiteController::class, 'shop']);
+Route::get('/shoppingCard', [App\Http\Controllers\WebsiteController::class, 'shopingCard']);
+Route::get('/shopDetails', [App\Http\Controllers\WebsiteController::class, 'shopDetails']);
+Route::get('/chackout', [App\Http\Controllers\WebsiteController::class, 'chackout']);
+Route::get('/about', [App\Http\Controllers\WebsiteController::class, 'about']);
+Route::get('/contact', [App\Http\Controllers\WebsiteController::class, 'contact']);
+Route::get('/blog', [App\Http\Controllers\WebsiteController::class, 'blog']);
+Route::get('/blogDetails', [App\Http\Controllers\WebsiteController::class, 'blogDetails']);
 
 

@@ -41,8 +41,8 @@
                                     <tr>
                                         <td>{{$data->product_id }}</td>
 
-                                        <td><img src="{{ asset('admin/img/examples/example1.jpeg') }}" alt=""
-                                                style="height:100px; width:100px"></td>
+                                        <td><img src="{{ asset('uplode/product/'.$data->product_image) }}" alt=""
+                                                style="height:100px; width:100px" class="rounded-4"></td>
                                         <td>{{$data->product_name}}</td>
                                         <td>{{ $data->product_tax }}</td>
                                         <td>{{$data->product_category_id}}</td>

@@ -7,42 +7,42 @@ use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
 {
-     function index()
+    function index()
     {
-         $product = tbl_product::all();
+        $product = tbl_product::all();
         return view('website.pages.index', compact('product'));
     }
-     function shop()
+    function shop()
     {
         return view('website.pages.shop');
     }
-     function shopingCard()
+    function shopingCard()
     {
         return view('website.pages.shoppingCard');
     }
-     function shopDetails()
+    function shopDetails()
     {
         return view('website.pages.shopDetails');
     }
-     function chackout()
+    function chackout()
     {
         return view('website.pages.chackout');
     }
-     function about()
+    function about()
     {
         return view('website.pages.about');
     }
-     function contact()
+    function contact()
     {
         return view('website.pages.contact');
     }
-     function blog()
+    function blog()
     {
         return view('website.pages.blog');
     }
-     function blogDetails()
+    function blogDetails()
     {
         return view('website.pages.blogDetails');
     }
-    
+
 }

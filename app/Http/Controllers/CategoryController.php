@@ -20,7 +20,7 @@ class CategoryController extends Controller
         $categoryImage = $request->file('categoryImage');
         $categoryImageName = "";
         if ($categoryImage) {
-            $categoryImageName = time() ."category.png";
+            $categoryImageName = time() . "category.png";
             $categoryImage->move($path, $categoryImageName);
         }
 
@@ -29,7 +29,7 @@ class CategoryController extends Controller
         if ($categoryBannerImage) {
             $categoryBannerImageName = time() . "banner.png";
             $categoryBannerImage->move($path, $categoryBannerImageName);
-        } 
+        }
 
         $category->category_name = $request->categoryName;
         $category->category_image = $categoryImageName;
@@ -49,9 +49,25 @@ class CategoryController extends Controller
     {
 
         $category = tbl_category::find($request->category_id);
+
+        $path = public_path('uplode/category');
+        $categoryImage = $request->file('categoryImage');
+        $categoryImageName = "";
+        if ($categoryImage) {
+            $categoryImageName = time() . "category.png";
+            $categoryImage->move($path, $categoryImageName);
+        }
+
+        $categoryBannerImage = $request->file('categoryBannerImage');
+        $categoryBannerImageName = "";
+        if ($categoryBannerImage) {
+            $categoryBannerImageName = time() . "banner.png";
+            $categoryBannerImage->move($path, $categoryBannerImageName);
+        }
+        
         $category->category_name = $request->categoryName;
-        $category->category_image = $request->categoryImage;
-        $category->category_banner_image = $request->categoryBannerImage;
+        $category->category_image = $categoryImageName;
+        $category->category_banner_image = $categoryBannerImageName;
         $category->save();
         return redirect('/admin/category');
     }

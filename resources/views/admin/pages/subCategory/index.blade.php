@@ -36,7 +36,7 @@
                                         <td>{{$data->sub_category_name}}</td>
                                         <td>{{$data->category_id}}</td>
                                         <td><img src="{{ asset('uplode/subCategory/' . $data->sub_category_image) }}" alt=""
-                                                style="height:100px; width:100px"></td>
+                                                style="height:100px; width:100px" class="rounded-4"></td>
 
                                         <td>
                                             <div class="d-flex ">
@@ -78,8 +78,9 @@
             console.log(sub_category_image);
             document.getElementById("subCategoryId").value = sub_category_id;
             document.getElementById("subCategoryName").value = sub_category_name;
-            document.getElementById("categoryId").value = category_id;
+            document.querySelector("select[name='categoryId']").value = category_id;
             document.getElementById("subCategoryImage").value = sub_category_image;
+
         }
     </script>
 @endsection

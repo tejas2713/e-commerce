@@ -18,56 +18,78 @@
 
                     </div>
                 </div>
-                <form action="/admin/product" method="post">
+                <form action="/admin/product" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row mx-2" style="border:1px solid green">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name">Product Name</label>
-                                <input type="text" id="name" name="productName" placeholder="Category Name"
+                                <label for="productName">Product Name</label>
+                                <input type="text" id="productName" name="productName" placeholder="Product Name"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="name">HSN Code</label>
-                                <input type="text" id="name" name="hsn" placeholder="Category Name"
+                                <label for="hsn">HSN Code</label>
+                                <input type="text" id="hsn" name="hsn" placeholder="HSN Code"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="name">Product Weight</label>
-                                <input type="text" id="name" name="productWeight" placeholder="Category Name"
+                                <label for="productWeight">Product Weight</label>
+                                <input type="text" id="productWeight" name="productWeight" placeholder="Product Weight"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="name">Category</label>
-                                <input type="text" id="name" name="category" placeholder="Category Name"
-                                    class="form-control">
+                            <div class="form-group ">
+                                <label for="categoryId">Category</label>
+
+                                <select class="form-select form-control" aria-label="Default select example"
+                                    name="categoryId">
+                                    @foreach ($category as $data)
+                                        <option value="{{ $data->category_id  }}">{{$data->category_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
+
                         <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="name"> Sub Category</label>
-                                <input type="text" id="name" name="subCategory" placeholder="Category Name"
-                                    class="form-control">
+                            <div class="form-group ">
+                                <label for="subCategoryId">Sub Category</label>
+
+                                <select class="form-select form-control" aria-label="Default select example"
+                                    name="subCategoryId">
+                                    @foreach ($subcategory as $data)
+                                        <option value="{{ $data->sub_category_id}}">{{$data->sub_category_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
+
                         <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="name">Tax %</label>
-                                <input type="text" id="name" name="tax" placeholder="Category Name"
-                                    class="form-control">
+                            <div class="form-group ">
+                                <label for="tax">Tax %</label>
+
+                                <select class="form-select form-control" aria-label="Default select example" name="tax">
+                                    @foreach ($tax as $data)
+                                        <option value="{{ $data->tax_id  }}">{{$data->tax_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
+                        
                         <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="name">Unit</label>
-                                <input type="text" id="name" name="unit" placeholder="Category Name"
-                                    class="form-control">
+                            <div class="form-group ">
+                                <label for="unitId">Unit</label>
+
+                                <select class="form-select form-control" aria-label="Default select example"
+                                    name="unitId">
+                                    @foreach ($unit as $data)
+                                        <option value="{{ $data->unit_id  }}">{{$data->unit_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="card-body" style="background-color:rgb(168, 221, 221)">
@@ -106,6 +128,15 @@
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-md-3">
+
+                                <div class="form-group">
+                                    <label for="productImage">Product Image</label>
+                                    <input type="file" id="productImage" name="productImage" class="form-control">
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

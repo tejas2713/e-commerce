@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\tbl_category;
 use App\Models\tbl_product;
+use App\Models\tbl_subcategory;
+use App\Models\tbl_tax;
+use App\Models\tbl_unit;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -11,18 +15,29 @@ class ProductController extends Controller
     function index()
     {
         $product = tbl_product::all();
-        return view('admin.pages.product.index',compact("product"));
+        $category = tbl_category::all();
+        $subcategory = tbl_subcategory::all();
+        $tax = tbl_tax::all();
+        $unit = tbl_unit::all();
+        return view('admin.pages.product.index',compact("product","category","subcategory","tax","unit"));
     }
     function store(Request $request)
     {
         $product = new tbl_product();
+        $path = public_path('uplode/product');
+        $productimage = $request->file('productImage');
+        $productImageName="";
+        if($productimage){
+            $productImageName = time()."_".$productimage->getClientOriginalName();
+            $productimage->move($path,$productImageName);
+        }
         $product->product_name = $request->productName;
         $product->product_hsn = $request->hsn;
         $product->product_weight = $request->productWeight;
-        $product->product_category_id = $request->category;
-        $product->product_sub_category_id = $request->subCategory;
+        $product->product_category_id = $request->categoryId;
+        $product->product_sub_category_id = $request->subCategoryId;
         $product->product_tax = $request->tax;
-        $product->product_unit = $request->unit;
+        $product->product_unit = $request->unitId;
         $product->product_bar_code = $request->barcode;
         $product->product_qr_code = $request->qrcode;
         $product->product_unieqe_code = $request->unique_code;
@@ -33,6 +48,7 @@ class ProductController extends Controller
         $product->product_distributer = $request->distributor_price;
         $product->product_op_qty = $request->opening_qty;
         $product->product_op_value = $request->opening_value;
+        $product->product_image = $productImageName;
         $product->save();
         return redirect("/admin/product");
     }

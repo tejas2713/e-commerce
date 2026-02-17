@@ -8,8 +8,8 @@
                     <div class="breadcrumb__text">
                         <h4>Shopping Cart</h4>
                         <div class="breadcrumb__links">
-                            <a href="./index.html">Home</a>
-                            <a href="./shop.html">Shop</a>
+                            <a href="/master">Home</a>
+                            <a href="/master/shop">Shop</a>
                             <span>Shopping Cart</span>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                                 <tr>
                                     <td class="product__cart__item">
                                         <div class="product__cart__item__pic">
-                                            <img src="img/shopping-cart/cart-1.jpg" alt="">
+                                            <img src="{{ asset('website/img/shopping-cart/cart-1.jpg')}}" alt="">
                                         </div>
                                         <div class="product__cart__item__text">
                                             <h6>T-shirt Contrast Pocket</h6>
@@ -58,7 +58,7 @@
                                 <tr>
                                     <td class="product__cart__item">
                                         <div class="product__cart__item__pic">
-                                            <img src="img/shopping-cart/cart-2.jpg" alt="">
+                                            <img src="{{ asset('website/img/shopping-cart/cart-2.jpg')}}" alt="">
                                         </div>
                                         <div class="product__cart__item__text">
                                             <h6>Diagonal Textured Cap</h6>
@@ -78,7 +78,7 @@
                                 <tr>
                                     <td class="product__cart__item">
                                         <div class="product__cart__item__pic">
-                                            <img src="img/shopping-cart/cart-3.jpg" alt="">
+                                            <img src="{{ asset('website/img/shopping-cart/cart-3.jpg')}}" alt="">
                                         </div>
                                         <div class="product__cart__item__text">
                                             <h6>Basic Flowing Scarf</h6>
@@ -98,7 +98,7 @@
                                 <tr>
                                     <td class="product__cart__item">
                                         <div class="product__cart__item__pic">
-                                            <img src="img/shopping-cart/cart-4.jpg" alt="">
+                                            <img src="{{ asset('website/img/shopping-cart/cart-4.jpg')}}" alt="">
                                         </div>
                                         <div class="product__cart__item__text">
                                             <h6>Basic Flowing Scarf</h6>

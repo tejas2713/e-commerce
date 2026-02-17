@@ -1,5 +1,3 @@
-
-
 <!-- Modal -->
 
 
@@ -12,23 +10,26 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/admin/subCategory/edit" method="post">
+                <form action="/admin/subCategory/edit" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="subCategoryId" id="subCategoryId">
                     <div class="row mx-2">
                         <div class="form-group has-success">
                             <label for="categoryId">Category</label>
-                            <select class="form-select form-control" aria-label="Default select example"
-                                name="categoryId" >
+                            <select id="categoryId" class="form-select form-control" aria-label="Default select example"
+                                name="categoryId">
                                 @foreach ($category as $data)
-                                    <option id="categoryId" value="{{ $data->category_id  }}">{{$data->category_name}}</option>
+                                    <option   value="{{ $data->category_id  }}">
+                                        {{$data->category_name}}
+                                        
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group has-success">
                             <label for="subCategoryName">Sub Category Name</label>
-                            <input type="text" id="subCategoryName" name="editSubCategoryName" placeholder="Sub Category Name"
-                                class="form-control">
+                            <input type="text" id="subCategoryName" name="editSubCategoryName"
+                                placeholder="Sub Category Name" class="form-control">
                         </div>
                     </div>
                     <div class="row mx-2">
@@ -48,8 +49,6 @@
             </div>
 
         </div>
-
-
-
+ 
     </div>
 </div>
