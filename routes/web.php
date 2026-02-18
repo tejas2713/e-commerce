@@ -46,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/product/delete', [ProductController::class, 'remove']);
 
 });
+
 Route::get('/', [App\Http\Controllers\WebsiteController::class, 'index']);
 Route::get('/shop', [App\Http\Controllers\WebsiteController::class, 'shop']);
 Route::get('/shoppingCard', [App\Http\Controllers\WebsiteController::class, 'shopingCard']);
@@ -56,4 +57,5 @@ Route::get('/contact', [App\Http\Controllers\WebsiteController::class, 'contact'
 Route::get('/blog', [App\Http\Controllers\WebsiteController::class, 'blog']);
 Route::get('/blogDetails', [App\Http\Controllers\WebsiteController::class, 'blogDetails']);
 
+Route::post('/editProfile', [App\Http\Controllers\WebsiteController::class, 'editProfile']);
 

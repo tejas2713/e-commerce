@@ -24,7 +24,7 @@
                 @foreach ($product as $item)
                     <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix ">
                         <div class="product__item">
-                            <a href="/master/shopDetails">
+                            <a href="/shopDetails">
                                 <div class="product__item__pic set-bg"
                                     data-setbg="{{ asset('uplode/product/' . $item->product_image) }}">
                                     <span class="label">Details</span>
