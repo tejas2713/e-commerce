@@ -1,6 +1,6 @@
 @extends("website.layout.master")
 @section("content")
-  <!-- Breadcrumb Section Begin -->
+    <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option">
         <div class="container">
             <div class="row">
@@ -35,86 +35,35 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="{{ asset('website/img/shopping-cart/cart-1.jpg')}}" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>T-shirt Contrast Pocket</h6>
-                                            <h5>$98.49</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
+                                @foreach ($cart as $item)
+                                    <tr>
+                                        <td class="product__cart__item">
+                                            <div class="product__cart__item__pic">
+                                                <img src="{{ asset('website/img/shopping-cart/cart-1.jpg')}}" alt="">
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 30.00</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="{{ asset('website/img/shopping-cart/cart-2.jpg')}}" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>Diagonal Textured Cap</h6>
-                                            <h5>$98.49</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
+                                            <div class="product__cart__item__text">
+                                                <h6>T-shirt Contrast Pocket</h6>
+                                                <h5>$98.49</h5>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 32.50</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="{{ asset('website/img/shopping-cart/cart-3.jpg')}}" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>Basic Flowing Scarf</h6>
-                                            <h5>$98.49</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
+                                        </td>
+                                        <td class="quantity__item">
+                                            <div class="quantity">
+                                                <div class="pro-qty-2">
+                                                    <input type="text" value="1">
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 47.00</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="{{ asset('website/img/shopping-cart/cart-4.jpg')}}" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>Basic Flowing Scarf</h6>
-                                            <h5>$98.49</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 30.00</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
+                                        </td>
+                                        <td class="cart__price">$ 30.00</td>
+                                        <form action="/remove-from-cart" method="post">
+                                            @csrf
+                                            <input type="hidden" name="cartId" value="{{ $item->cart_id  }}">
+                                            <td class="cart__close"><button type="submit" class="border-0"><i
+                                                        class="fa fa-close"></i></button></td>
+                                        </form>
+                                    </tr>
+                                @endforeach
+
+
                             </tbody>
                         </table>
                     </div>
@@ -145,7 +94,18 @@
                             <li>Subtotal <span>$ 169.50</span></li>
                             <li>Total <span>$ 169.50</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">Proceed to checkout</a>
+                        <form action="/chackout" method="post">
+                            @csrf
+                            @foreach ($cart as $item)
+                                <input type="hidden" name="productId" value="{{ $item->cart_product_id }}">
+                                <input type="hidden" name="price" value="{{ $item->cart_price }}">
+                                <input type="hidden" name="quantity" value="{{ $item->cart_quantity }}">
+                                <input type="hidden" name="total" value="{{ $item->cart_total }}">
+                                <input type="hidden" name="userId" value="{{$item->cart_user_id}}">
+                            @endforeach
+
+                            <button type="submit" class="primary-btn btn px-s mx-4">Proceed to checkout</button>
+                        </form>
                     </div>
                 </div>
             </div>

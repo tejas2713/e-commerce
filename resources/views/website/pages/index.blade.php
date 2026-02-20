@@ -29,16 +29,30 @@
                                     data-setbg="{{ asset('uplode/product/' . $item->product_image) }}">
                                     <span class="label">Details</span>
                                     <ul class="product__hover">
-                                        <li><a href="#"><img src="{{ asset('website/img/icon/heart.png') }}" alt=""></a></li>
-                                        <li><a href="#"><img src="{{ asset('website/img/icon/compare.png') }}" alt="">
-                                                <span>Compare</span></a></li>
-                                        <li><a href="#"><img src="{{ asset('website/img/icon/search.png') }}" alt=""></a></li>
+                                        <form action="/wishlist" method="post">
+                                            @csrf
+                                            <input type="hidden" name="productId" value="{{ $item->product_id }}">
+                                            <input type="hidden" name="userId" value="{{ Auth::user()->id ?? 0 }}">
+                                            <li><button type="submit" class="border-0 bg-0"><img
+                                                        src="{{ asset('website/img/icon/heart.png') }}" alt=""></button></li>
+                                        </form>
+                                        <li><button type="submit" class="border-0 bg-0"><img
+                                                    src="{{ asset('website/img/icon/compare.png') }}" alt="">
+                                                <span>Compare</span></button></li>
+                                        <li><button type="submit" class="border-0 bg-0"><img
+                                                    src="{{ asset('website/img/icon/search.png') }}" alt=""></button></li>
                                     </ul>
                                 </div>
                             </a>
                             <div class="product__item__text">
                                 <h6>{{ $item->product_name }}</h6>
-                                <a href="#" class="add-cart">+ Add To Cart</a>
+                                <form action="/add-to-cart" method="post">
+                                    @csrf
+                                    <input type="hidden" name="productId" value="{{ $item->product_id  }}">
+                                    <input type="hidden" name="userId" value="{{ Auth::user()->id ?? 0 }}">
+
+                                    <button type="submit" class="border-0 bg-0">+ Add To Cart</button>
+                                </form>
                                 <div class="rating">
                                     <i class="fa fa-star-o"></i>
                                     <i class="fa fa-star-o"></i>

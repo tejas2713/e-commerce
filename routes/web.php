@@ -51,11 +51,18 @@ Route::get('/', [App\Http\Controllers\WebsiteController::class, 'index']);
 Route::get('/shop', [App\Http\Controllers\WebsiteController::class, 'shop']);
 Route::get('/shoppingCard', [App\Http\Controllers\WebsiteController::class, 'shopingCard']);
 Route::get('/shopDetails', [App\Http\Controllers\WebsiteController::class, 'shopDetails']);
+
 Route::get('/chackout', [App\Http\Controllers\WebsiteController::class, 'chackout']);
+Route::post('/chackout', [App\Http\Controllers\WebsiteController::class, 'addToChackout']);
+
 Route::get('/about', [App\Http\Controllers\WebsiteController::class, 'about']);
 Route::get('/contact', [App\Http\Controllers\WebsiteController::class, 'contact']);
 Route::get('/blog', [App\Http\Controllers\WebsiteController::class, 'blog']);
 Route::get('/blogDetails', [App\Http\Controllers\WebsiteController::class, 'blogDetails']);
 
 Route::post('/editProfile', [App\Http\Controllers\WebsiteController::class, 'editProfile']);
+Route::post('/add-to-cart', [App\Http\Controllers\WebsiteController::class, 'addToCart']);
+Route::post('/remove-from-cart', [App\Http\Controllers\WebsiteController::class, 'removeFromCart']);
+Route::get('/wishlist', [App\Http\Controllers\WebsiteController::class, 'wishlist']);
+Route::post('/wishlist', [App\Http\Controllers\WebsiteController::class, 'addToWishlist']);
 

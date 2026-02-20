@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\tbl_cart;
 use App\Models\tbl_category;
+use App\Models\tbl_order_child;
+use App\Models\tbl_order_master;
 use App\Models\tbl_product;
 use App\Models\tbl_subcategory;
+use App\Models\tbl_wishlist;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +34,8 @@ class WebsiteController extends Controller
     }
     function shopingCard()
     {
-        return view('website.pages.shoppingCard');
+        $cart = tbl_cart::where('cart_user_id', Auth::user()->id)->get();
+        return view('website.pages.shoppingCard', compact('cart'));
     }
     function shopDetails()
     {
@@ -40,6 +45,29 @@ class WebsiteController extends Controller
     function chackout()
     {
         return view('website.pages.chackout');
+    }
+
+    function addToChackout(Request $request)
+    {
+        $orderMaster = new tbl_order_master();
+        $orderMaster->order_master_user_id = $request->userId;
+        $orderMaster->order_master_total = $request->total;
+        $orderMaster->save();
+
+        $orderChild = new tbl_order_child();
+        $orderChild->order_child_user_id = $request->userId;
+        $orderChild->order_child_master_id = "1";
+        $orderChild->order_child_product_id = $request->productId;
+        $orderChild->order_child_cart_price = $request->price;
+        $orderChild->order_child_cart_quantity = $request->quantity;
+        $orderChild->order_child_cart_total = $request->total;
+        $orderChild->save();
+
+        $cart = tbl_cart::where('cart_user_id', $request->userId)->get();
+        foreach ($cart as $item) {
+          $item->delete();
+        }
+        return redirect('/chackout');
     }
     function about()
     {
@@ -67,5 +95,38 @@ class WebsiteController extends Controller
         return redirect('/');
     }
 
+    function addToCart(Request $request)
+    {
+        $cart = new tbl_cart();
+        $cart->cart_product_id = $request->productId;
+        $cart->cart_user_id = $request->userId;
+        $cart->cart_price = "0";
+        $cart->cart_quantity = "1";
+        $cart->cart_total = "0";
+        $cart->save();
+        return redirect('/shoppingCard');
+    }
+
+    function removeFromCart(Request $request)
+    {
+        $cart = tbl_cart::find($request->cartId);
+        $cart->delete();
+        return redirect('/shoppingCard');
+    }
+
+    function wishlist()
+    {
+        $wishlist = tbl_wishlist::where('wishlist_user_id', Auth::user()->id)->get();
+        return view('website.pages.wishlist', compact('wishlist'));
+    }
+
+    function addToWishlist(Request $request)
+    {
+        $wishlist = new tbl_wishlist();
+        $wishlist->wishlist_product_id = $request->productId;
+        $wishlist->wishlist_user_id = $request->userId;
+        $wishlist->save();
+        return redirect('/wishlist');
+    }
 
 }
