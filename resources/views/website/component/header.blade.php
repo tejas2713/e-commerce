@@ -49,9 +49,7 @@
                                     </li>
                                     <li>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="/editProfile"><button
-                                                onclick="editData('{{ Auth::user()->id ?? ''}}','{{ Auth::user()->name ?? '' }}','{{ Auth::user()->email ?? ''}}')">Edit
-                                                Profile</button></a>
+                                        <a class="dropdown-item" href="/editProfile">Edit Profile</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Logout</a>

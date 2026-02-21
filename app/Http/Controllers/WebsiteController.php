@@ -10,6 +10,7 @@ use App\Models\tbl_product;
 use App\Models\tbl_subcategory;
 use App\Models\tbl_wishlist;
 use App\Models\User;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,7 +35,15 @@ class WebsiteController extends Controller
     }
     function shopingCard()
     {
-        $cart = tbl_cart::where('cart_user_id', Auth::user()->id)->get();
+        $cart = DB::table('tbl_cart')
+            ->join('tbl_product', 'tbl_cart.cart_product_id', '=', 'tbl_product.product_id')
+            ->where('tbl_cart.cart_user_id', Auth::user()->id)
+            ->select(
+                'tbl_cart.*',
+                'tbl_product.*'
+            )
+            ->get();
+
         return view('website.pages.shoppingCard', compact('cart'));
     }
     function shopDetails()
@@ -53,19 +62,26 @@ class WebsiteController extends Controller
         $orderMaster->order_master_user_id = $request->userId;
         $orderMaster->order_master_total = $request->total;
         $orderMaster->save();
+        // Get all cart items of user
+        $cartItems = tbl_cart::where('cart_user_id', $request->userId)->get();
 
-        $orderChild = new tbl_order_child();
-        $orderChild->order_child_user_id = $request->userId;
-        $orderChild->order_child_master_id = "1";
-        $orderChild->order_child_product_id = $request->productId;
-        $orderChild->order_child_cart_price = $request->price;
-        $orderChild->order_child_cart_quantity = $request->quantity;
-        $orderChild->order_child_cart_total = $request->total;
-        $orderChild->save();
+        // Insert multiple order_child entries
+        foreach ($cartItems as $item) {
 
+            $orderChild = new tbl_order_child(); // create inside loop
+
+            $orderChild->order_child_user_id = $request->userId;
+            $orderChild->order_child_master_id = $orderMaster->order_master_id; // correct master id
+            $orderChild->order_child_product_id = $item->cart_product_id;
+            $orderChild->order_child_cart_price = $item->cart_price;
+            $orderChild->order_child_cart_quantity = $item->cart_quantity;
+            $orderChild->order_child_cart_total = $item->cart_total;
+
+            $orderChild->save();
+        }
         $cart = tbl_cart::where('cart_user_id', $request->userId)->get();
         foreach ($cart as $item) {
-          $item->delete();
+            $item->delete();
         }
         return redirect('/chackout');
     }
@@ -88,11 +104,21 @@ class WebsiteController extends Controller
 
     function editProfile(Request $request)
     {
-        $user = User::find($request->id);
+        $user = auth()->user();
+        return view('website.pages.editProfile', compact('user'));
+    }
+
+    function updateProfile(Request $request)
+    {
+        $request->validate([
+            'userName' => 'required|string|max:255',
+            'userEmail' => 'required|string|email|max:255|unique:users,email,' . auth()->id(),
+        ]);
+        $user = auth()->user();
         $user->name = $request->userName;
         $user->email = $request->userEmail;
         $user->save();
-        return redirect('/');
+        return redirect('/')->with('success', 'Profile updated successfully.');
     }
 
     function addToCart(Request $request)

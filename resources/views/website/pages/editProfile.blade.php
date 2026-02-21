@@ -8,7 +8,8 @@
                     <div class="card-header">Edit Profile</div>
 
                     <div class="card-body">
-                        <form method="post" action="/editProfile">
+                    
+                        <form method="post" action="/updateProfile">
                             @csrf
                             <input type="hidden" id="userId" name="userId" value="{{ Auth::user()->id }}" >
                             <div class="row mb-3">

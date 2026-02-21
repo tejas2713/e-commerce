@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\tbl_category;
 use App\Models\tbl_subcategory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
@@ -11,10 +12,15 @@ class SubCategoryController extends Controller
     //
     function index()
     {
-        $subcategory = tbl_subcategory::all();
+        $subcategory = DB::table('tbl_subcategory')
+            ->join('tbl_category', 'tbl_subcategory.category_id', '=', 'tbl_category.category_id')
+            ->select(
+                'tbl_subcategory.*',
+                'tbl_category.category_name'
+            )
+            ->get();
         $category = tbl_category::all();
 
-        // return $subcategory;
         return view('admin.pages.subCategory.index', compact("subcategory", "category"));
     }
     function store(Request $request)
@@ -45,7 +51,7 @@ class SubCategoryController extends Controller
     {
 
         $subCategory = tbl_subcategory::find($request->subCategoryId);
-        
+
         $path = public_path('uplode/subCategory');
         $subCategoryImage = $request->file('subCategoryImage');
         $subCategoryImageName = "";

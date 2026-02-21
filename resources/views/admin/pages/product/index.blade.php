@@ -44,9 +44,9 @@
                                         <td><img src="{{ asset('uplode/product/'.$data->product_image) }}" alt=""
                                                 style="height:100px; width:100px" class="rounded-4"></td>
                                         <td>{{$data->product_name}}</td>
-                                        <td>{{ $data->product_tax }}</td>
-                                        <td>{{$data->product_category_id}}</td>
-                                        <td>{{$data->product_sub_category_id}}</td>
+                                        <td>{{ $data->tax_name }}</td>
+                                        <td>{{$data->category_name}}</td>
+                                        <td>{{$data->sub_category_name}}</td>
                                         <td>ACTIVE</td>
                                         <td>
                                             <div class="d-flex ">

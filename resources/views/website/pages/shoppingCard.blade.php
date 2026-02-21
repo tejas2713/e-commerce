@@ -39,11 +39,11 @@
                                     <tr>
                                         <td class="product__cart__item">
                                             <div class="product__cart__item__pic">
-                                                <img src="{{ asset('website/img/shopping-cart/cart-1.jpg')}}" alt="">
+                                                <img src="{{ asset('uplode/product/'.$item->product_image)}}" alt="" height="120" width="120">
                                             </div>
                                             <div class="product__cart__item__text">
-                                                <h6>T-shirt Contrast Pocket</h6>
-                                                <h5>$98.49</h5>
+                                                <h6>{{ $item->product_name }}</h6>
+                                                <h5>Rs{{ $item->product_mrp }}</h5>
                                             </div>
                                         </td>
                                         <td class="quantity__item">
@@ -53,7 +53,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="cart__price">$ 30.00</td>
+                                        <td class="cart__price">${{ $item->cart_total }}</td>
                                         <form action="/remove-from-cart" method="post">
                                             @csrf
                                             <input type="hidden" name="cartId" value="{{ $item->cart_id  }}">

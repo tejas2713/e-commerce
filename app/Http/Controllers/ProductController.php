@@ -7,6 +7,7 @@ use App\Models\tbl_product;
 use App\Models\tbl_subcategory;
 use App\Models\tbl_tax;
 use App\Models\tbl_unit;
+use DB;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -15,21 +16,35 @@ class ProductController extends Controller
     function index()
     {
         $product = tbl_product::all();
+        $product = DB::table('tbl_product')
+            ->join('tbl_category', 'tbl_product.product_category_id', '=', 'tbl_category.category_id')
+            ->join('tbl_subcategory', 'tbl_product.product_sub_category_id', '=', 'tbl_subcategory.sub_category_id')
+            ->join('tbl_tax', 'tbl_product.product_tax', '=', 'tbl_tax.tax_id')
+            ->join('tbl_unit', 'tbl_product.product_unit', '=', 'tbl_unit.unit_id')
+            ->select(
+                'tbl_product.*',
+                'tbl_category.category_name',
+                'tbl_subcategory.sub_category_name',
+                'tbl_tax.tax_name',
+                'tbl_unit.unit_name'
+            )
+            ->get();
         $category = tbl_category::all();
         $subcategory = tbl_subcategory::all();
         $tax = tbl_tax::all();
         $unit = tbl_unit::all();
-        return view('admin.pages.product.index',compact("product","category","subcategory","tax","unit"));
+
+        return view('admin.pages.product.index', compact("product", "category", "subcategory", "tax", "unit"));
     }
     function store(Request $request)
     {
         $product = new tbl_product();
         $path = public_path('uplode/product');
         $productimage = $request->file('productImage');
-        $productImageName="";
-        if($productimage){
-            $productImageName = time()."_".$productimage->getClientOriginalName();
-            $productimage->move($path,$productImageName);
+        $productImageName = "";
+        if ($productimage) {
+            $productImageName = time() . "_" . $productimage->getClientOriginalName();
+            $productimage->move($path, $productImageName);
         }
         $product->product_name = $request->productName;
         $product->product_hsn = $request->hsn;
@@ -53,7 +68,7 @@ class ProductController extends Controller
         return redirect("/admin/product");
     }
 
-       public function remove(Request $request)
+    public function remove(Request $request)
     {
 
         $product = tbl_product::find($request->product_id);

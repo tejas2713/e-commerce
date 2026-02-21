@@ -34,7 +34,7 @@
                                     <tr>
                                         <td>{{$data->sub_category_id}}</td>
                                         <td>{{$data->sub_category_name}}</td>
-                                        <td>{{$data->category_id}}</td>
+                                        <td>{{$data->category_name}}</td>
                                         <td><img src="{{ asset('uplode/subCategory/' . $data->sub_category_image) }}" alt=""
                                                 style="height:100px; width:100px" class="rounded-4"></td>
 

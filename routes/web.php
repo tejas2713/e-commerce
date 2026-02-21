@@ -60,7 +60,9 @@ Route::get('/contact', [App\Http\Controllers\WebsiteController::class, 'contact'
 Route::get('/blog', [App\Http\Controllers\WebsiteController::class, 'blog']);
 Route::get('/blogDetails', [App\Http\Controllers\WebsiteController::class, 'blogDetails']);
 
-Route::post('/editProfile', [App\Http\Controllers\WebsiteController::class, 'editProfile']);
+Route::get('/editProfile', [App\Http\Controllers\WebsiteController::class, 'editProfile']);
+Route::post('/updateProfile', [App\Http\Controllers\WebsiteController::class, 'updateProfile']);
+
 Route::post('/add-to-cart', [App\Http\Controllers\WebsiteController::class, 'addToCart']);
 Route::post('/remove-from-cart', [App\Http\Controllers\WebsiteController::class, 'removeFromCart']);
 Route::get('/wishlist', [App\Http\Controllers\WebsiteController::class, 'wishlist']);
