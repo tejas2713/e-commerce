@@ -100,7 +100,7 @@
                 <div class="header__nav__option">
                     <a href="#" class="search-switch"><img src="{{ asset('website/img/icon/search.png') }}" alt=""></a>
                     <a href="/wishlist"><img src="{{ asset('website/img/icon/heart.png') }}" alt=""></a>
-                    <a href="/shoppingCard"><img src="{{ asset('website/img/icon/cart.png') }}" alt=""> <span>0</span></a>
+                    <a href="/order"><img src="{{ asset('website/img/icon/cart.png') }}" alt=""> <span>0</span></a>
                     <div class="price">Rs 0.00</div>
 
 

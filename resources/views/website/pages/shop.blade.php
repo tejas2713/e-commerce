@@ -109,7 +109,13 @@
                                     </div>
                                     <div class="product__item__text">
                                         <h6>{{ $item->product_name }}</h6>
-                                        <a href="#" class="add-cart">+ Add To Cart</a>
+                                        <form action="/add-to-cart" method="post">
+                                            @csrf
+                                            <input type="hidden" name="productId" value="{{ $item->product_id  }}">
+                                            <input type="hidden" name="userId" value="{{ Auth::user()->id ?? 0 }}">
+
+                                            <button type="submit" class="border-0 bg-0">+ Add To Cart</button>
+                                        </form>
                                         <div class="rating">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>

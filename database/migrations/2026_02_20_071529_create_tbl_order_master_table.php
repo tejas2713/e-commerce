@@ -14,6 +14,9 @@ return new class extends Migration {
             $table->integer('order_master_id')->autoIncrement();
             $table->integer('order_master_user_id');
             $table->string('order_master_total')->nullable();
+            $table->string('order_master_paymentstatus')->nullable();
+            $table->string('order_master_paymentmethod')->nullable();
+            $table->string('order_master_orderstatus')->nullable();
             $table->timestamps();
         });
     }

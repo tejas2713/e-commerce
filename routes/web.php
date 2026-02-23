@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TaxController;
@@ -45,6 +46,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/product', [ProductController::class, 'store']);
     Route::post('/admin/product/delete', [ProductController::class, 'remove']);
 
+
+    Route::get('/admin/order', [OrderController::class, 'index']);
+
 });
 
 Route::get('/', [App\Http\Controllers\WebsiteController::class, 'index']);
@@ -65,6 +69,9 @@ Route::post('/updateProfile', [App\Http\Controllers\WebsiteController::class, 'u
 
 Route::post('/add-to-cart', [App\Http\Controllers\WebsiteController::class, 'addToCart']);
 Route::post('/remove-from-cart', [App\Http\Controllers\WebsiteController::class, 'removeFromCart']);
+
 Route::get('/wishlist', [App\Http\Controllers\WebsiteController::class, 'wishlist']);
 Route::post('/wishlist', [App\Http\Controllers\WebsiteController::class, 'addToWishlist']);
 
+Route::get('/order', [App\Http\Controllers\WebsiteController::class, 'order']);
+Route::get('/order/view/{id}', [App\Http\Controllers\WebsiteController::class, 'viewOrder']);

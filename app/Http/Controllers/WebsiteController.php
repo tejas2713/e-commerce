@@ -61,6 +61,10 @@ class WebsiteController extends Controller
         $orderMaster = new tbl_order_master();
         $orderMaster->order_master_user_id = $request->userId;
         $orderMaster->order_master_total = $request->total;
+        $orderMaster->order_master_total = $request->total;
+        $orderMaster->order_master_paymentstatus = "Pending";
+        $orderMaster->order_master_paymentmethod = "cash on delivery ";
+        $orderMaster->order_master_orderstatus = "Processing";
         $orderMaster->save();
         // Get all cart items of user
         $cartItems = tbl_cart::where('cart_user_id', $request->userId)->get();
@@ -153,6 +157,33 @@ class WebsiteController extends Controller
         $wishlist->wishlist_user_id = $request->userId;
         $wishlist->save();
         return redirect('/wishlist');
+    }
+
+    function order()
+    {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+
+        $order = DB::table('tbl_order_master')->where('order_master_user_id', Auth::id())->get();
+
+        return view('website.pages.order', compact('order'));
+    }
+
+    function viewOrder($id)
+    {
+        $orderId =$id;
+
+        $orderDetails = DB::table('tbl_order_child')
+            ->join('tbl_product', 'tbl_order_child.order_child_product_id', '=', 'tbl_product.product_id')
+            ->where('tbl_order_child.order_child_master_id', $orderId)
+            ->select(
+                'tbl_order_child.*',
+                'tbl_product.*'
+            )
+            ->get();
+
+        return view('website.pages.orderDetails', compact('orderDetails'));
     }
 
 }
