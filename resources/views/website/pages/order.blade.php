@@ -52,14 +52,6 @@
 
                                         <td><a href="/order/view/{{ $item->order_master_id }}"><i
                                                                                     class="fa fa-eye"></i></a></td>
-                                        <td>
-                                            <form action="/order/view" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="order_id" value="{{ $item->order_master_id }}">
-                                                <i class="fa fa-eye"></i>
-
-                                            </form>
-                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

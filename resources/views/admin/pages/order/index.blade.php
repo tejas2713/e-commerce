@@ -12,7 +12,7 @@
 
                             <div class="col-md-6 card-title ">Order</div>
                             <!-- Button trigger modal -->
-                          
+
                         </div>
 
 
@@ -36,7 +36,7 @@
 
                                     <tr>
                                         <td>{{ $data->order_master_id }}</td>
-                                        <td>{{$data->user_name}}</td>
+                                        <td>{{$data->name}}</td>
                                         <td>{{$data->order_master_total}}</td>
                                         <td>{{$data->order_master_paymentstatus}}</td>
                                         <td>{{$data->order_master_paymentmethod}}</td>
@@ -48,12 +48,14 @@
                                             <div class="d-flex ">
 
                                                 <button type="button" class="bg-transparent border-0"><i
-                                                        class="fa-solid fa-eye text-primary fs-5 " data-bs-toggle="modal"
+                                                        class="fa-solid fa-pen-to-square text-primary fs-5 " data-bs-toggle="modal"
                                                         data-bs-target="#editOrder"></i>
                                                 </button>
 
 
 
+                                                <a href="/admin/order/view/{{ $data->order_master_id }}"><i
+                                                        class="fa fa-eye"></i></a>
                                             </div>
                                         </td>
 

@@ -43,7 +43,7 @@
                                             </div>
                                             <div class="product__cart__item__text">
                                                 <h6>{{ $item->product_name }}</h6>
-                                                <h5>Rs{{ $item->product_mrp }}</h5>
+                                                <h5>₹{{ $item->product_mrp }}</h5>
                                             </div>
                                         </td>
                                         <td class="quantity__item">
@@ -53,7 +53,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="cart__price">${{ $item->cart_total }}</td>
+                                        <td class="cart__price">₹{{ $item->cart_total }}</td>
                                         <form action="/remove-from-cart" method="post">
                                             @csrf
                                             <input type="hidden" name="cartId" value="{{ $item->cart_id  }}">

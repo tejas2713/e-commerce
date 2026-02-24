@@ -83,8 +83,8 @@
                                     <p>Sort by Price:</p>
                                     <select>
                                         <option value="">Low To High</option>
-                                        <option value="">$0 - $55</option>
-                                        <option value="">$55 - $100</option>
+                                        <option value="">₹0 - ₹55</option>
+                                        <option value="">₹55 - ₹100</option>
                                     </select>
                                 </div>
                             </div>
@@ -98,8 +98,14 @@
                                         data-setbg="{{asset('uplode/product/' . $item->product_image)}}">
                                         <span class="label">Sale</span>
                                         <ul class="product__hover">
-                                            <li><a href="#"><img src="{{ asset('website/img/icon/heart.png') }}" alt=""></a>
-                                            </li>
+                                            <form action="/wishlist" method="post">
+                                                @csrf
+                                                <input type="hidden" name="productId" value="{{ $item->product_id }}">
+                                                <input type="hidden" name="userId" value="{{ Auth::user()->id ?? 0 }}">
+                                                <li><button type="submit" class="border-0 bg-0"><img
+                                                            src="{{ asset('website/img/icon/heart.png') }}" alt=""></button>
+                                                </li>
+                                            </form>
                                             <li><a href="#"><img src="{{ asset('website/img/icon/compare.png') }}" alt="">
                                                     <span>Compare</span></a>
                                             </li>
@@ -123,7 +129,7 @@
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star-o"></i>
                                         </div>
-                                        <h5>{{ $item->product_sale}}</h5>
+                                        <h5>₹{{ $item->product_sale}}</h5>
                                         <div class="product__color__select">
                                             <label for="pc-7">
                                                 <input type="radio" id="pc-7">

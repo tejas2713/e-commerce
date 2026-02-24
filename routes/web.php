@@ -48,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/admin/order', [OrderController::class, 'index']);
+    Route::get('/admin/order/view/{id}', [OrderController::class, 'viewOrder']);
 
 });
 
@@ -72,6 +73,7 @@ Route::post('/remove-from-cart', [App\Http\Controllers\WebsiteController::class,
 
 Route::get('/wishlist', [App\Http\Controllers\WebsiteController::class, 'wishlist']);
 Route::post('/wishlist', [App\Http\Controllers\WebsiteController::class, 'addToWishlist']);
+Route::post('/remove-from-wishlist', [App\Http\Controllers\WebsiteController::class, 'removeFromWishlist']);
 
 Route::get('/order', [App\Http\Controllers\WebsiteController::class, 'order']);
 Route::get('/order/view/{id}', [App\Http\Controllers\WebsiteController::class, 'viewOrder']);

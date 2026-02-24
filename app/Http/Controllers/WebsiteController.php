@@ -146,7 +146,19 @@ class WebsiteController extends Controller
 
     function wishlist()
     {
-        $wishlist = tbl_wishlist::where('wishlist_user_id', Auth::user()->id)->get();
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+
+        $wishlist = DB::table('tbl_wishlist')
+            ->join('tbl_product', 'tbl_wishlist.wishlist_product_id', '=', 'tbl_product.product_id')
+            ->where('tbl_wishlist.wishlist_user_id', Auth::id())
+            ->select(
+                'tbl_wishlist.*',
+                'tbl_product.*'
+            )
+            ->get();
+
         return view('website.pages.wishlist', compact('wishlist'));
     }
 
@@ -156,6 +168,13 @@ class WebsiteController extends Controller
         $wishlist->wishlist_product_id = $request->productId;
         $wishlist->wishlist_user_id = $request->userId;
         $wishlist->save();
+        return redirect('/wishlist');
+    }
+
+    function removeFromWishlist(Request $request)
+    {
+        $wishlist = tbl_wishlist::find($request->wishlistId);
+        $wishlist->delete();
         return redirect('/wishlist');
     }
 
@@ -172,11 +191,11 @@ class WebsiteController extends Controller
 
     function viewOrder($id)
     {
-        $orderId =$id;
 
         $orderDetails = DB::table('tbl_order_child')
             ->join('tbl_product', 'tbl_order_child.order_child_product_id', '=', 'tbl_product.product_id')
-            ->where('tbl_order_child.order_child_master_id', $orderId)
+            ->where('tbl_order_child.order_child_master_id', $id)
+            ->where('tbl_order_child.order_child_user_id', Auth::id())
             ->select(
                 'tbl_order_child.*',
                 'tbl_product.*'
@@ -184,6 +203,7 @@ class WebsiteController extends Controller
             ->get();
 
         return view('website.pages.orderDetails', compact('orderDetails'));
+        return $id;
     }
 
 }

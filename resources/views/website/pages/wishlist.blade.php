@@ -31,7 +31,7 @@
                                     <th>Product</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,11 +42,12 @@
                                     <tr>
                                         <td class="product__cart__item">
                                             <div class="product__cart__item__pic">
-                                                <img src="{{ asset('website/img/shopping-cart/cart-1.jpg')}}" alt="">
+                                                <img src="{{ asset('uplode/product/' . $item->product_image)}}" alt=""
+                                                    height="120" width="120">
                                             </div>
                                             <div class="product__cart__item__text">
-                                                <h6>T-shirt Contrast Pocket</h6>
-                                                <h5>$98.49</h5>
+                                                <h6>{{ $item->product_name }}</h6>
+                                                <h5>₹{{ $item->product_mrp }}</h5>
                                             </div>
                                         </td>
                                         <td class="quantity__item">
@@ -56,8 +57,13 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="cart__price">$ 30.00</td>
-                                        <td class="cart__close"><i class="fa fa-close"></i></td>
+                                        <td class="cart__price">₹{{ $item->product_mrp }}</td>
+                                        <form action="/remove-from-wishlist" method="post">
+                                            @csrf
+                                            <input type="hidden" name="wishlistId" value="{{ $item->wishlist_id  }}">
+                                            <td class="cart__close"><button type="submit" class="border-0"><i
+                                                        class="fa fa-close"></i></button></td>
+                                        </form>
                                     </tr>
 
                                 @endforeach

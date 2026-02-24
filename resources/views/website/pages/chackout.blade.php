@@ -108,14 +108,14 @@
                                 <h4 class="order__title">Your order</h4>
                                 <div class="checkout__order__products">Product <span>Total</span></div>
                                 <ul class="checkout__total__products">
-                                    <li>01. Vanilla salted caramel <span>$ 300.0</span></li>
-                                    <li>02. German chocolate <span>$ 170.0</span></li>
-                                    <li>03. Sweet autumn <span>$ 170.0</span></li>
-                                    <li>04. Cluten free mini dozen <span>$ 110.0</span></li>
+                                    <li>01. Vanilla salted caramel <span>₹ 300.0</span></li>
+                                    <li>02. German chocolate <span>₹ 170.0</span></li>
+                                    <li>03. Sweet autumn <span>₹ 170.0</span></li>
+                                    <li>04. Cluten free mini dozen <span>₹ 110.0</span></li>
                                 </ul>
                                 <ul class="checkout__total__all">
-                                    <li>Subtotal <span>$750.99</span></li>
-                                    <li>Total <span>$750.99</span></li>
+                                    <li>Subtotal <span>₹750.99</span></li>
+                                    <li>Total <span>₹750.99</span></li>
                                 </ul>
                                 <div class="checkout__input__checkbox">
                                     <label for="acc-or">
