@@ -8,8 +8,8 @@
                     <div class="breadcrumb__text">
                         <h4>Order</h4>
                         <div class="breadcrumb__links">
-                            <a href="/master">Home</a>
-                            <a href="/master/shop">Shop</a>
+                            <a href="/">Home</a>
+                            <a href="/shop">Shop</a>
                             <span>Order</span>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="shopping__cart__table">
+                    <div class="cart__table">
                         <table>
                             <thead>
                                 <tr>
@@ -40,19 +40,20 @@
 
 
                                 @foreach ($order as $item)
+
                                     <tr>
-                                    <tr>
-                                        <td>{{ $item->order_master_id }}</td>
-                                        <td>{{ $item->order_master_total }}</td>
-                                        <td>{{ $item->order_master_paymentstatus }}</td>
-                                        <td>{{ $item->order_master_paymentmethod }}</td>
-                                        <td>{{ $item->order_master_orderstatus }}</td>
+                                        <td class="cart__price">{{ $item->order_master_id }}</td>
+                                        <td class="cart__price">{{ $item->order_master_total }}</td>
+                                        <td class="cart__price">{{ $item->order_master_paymentstatus }}</td>
+                                        <td class="cart__price">{{ $item->order_master_paymentmethod }}</td>
+                                        <td class="cart__price">{{ $item->order_master_orderstatus }}</td>
 
 
 
-                                        <td><a href="/order/view/{{ $item->order_master_id }}"><i
-                                                                                    class="fa fa-eye"></i></a></td>
+                                        <td class="cart__close"><a href="/order/view/{{ $item->order_master_id }}"><i class="fa fa-eye"></i></a>
+                                        </td>
                                     </tr>
+                                  
                                 @endforeach
                             </tbody>
                         </table>

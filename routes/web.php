@@ -55,10 +55,11 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', [App\Http\Controllers\WebsiteController::class, 'index']);
 Route::get('/shop', [App\Http\Controllers\WebsiteController::class, 'shop']);
 Route::get('/shoppingCard', [App\Http\Controllers\WebsiteController::class, 'shopingCard']);
-Route::get('/shopDetails', [App\Http\Controllers\WebsiteController::class, 'shopDetails']);
+Route::get('/shopDetails/{id}', [App\Http\Controllers\WebsiteController::class, 'shopDetails']);
 
 Route::get('/chackout', [App\Http\Controllers\WebsiteController::class, 'chackout']);
 Route::post('/chackout', [App\Http\Controllers\WebsiteController::class, 'addToChackout']);
+Route::post('/placeOrder', [App\Http\Controllers\WebsiteController::class, 'placeOrder']);
 
 Route::get('/about', [App\Http\Controllers\WebsiteController::class, 'about']);
 Route::get('/contact', [App\Http\Controllers\WebsiteController::class, 'contact']);
@@ -69,6 +70,7 @@ Route::get('/editProfile', [App\Http\Controllers\WebsiteController::class, 'edit
 Route::post('/updateProfile', [App\Http\Controllers\WebsiteController::class, 'updateProfile']);
 
 Route::post('/add-to-cart', [App\Http\Controllers\WebsiteController::class, 'addToCart']);
+Route::post('/update-to-cart', [App\Http\Controllers\WebsiteController::class, 'updateToCart']);
 Route::post('/remove-from-cart', [App\Http\Controllers\WebsiteController::class, 'removeFromCart']);
 
 Route::get('/wishlist', [App\Http\Controllers\WebsiteController::class, 'wishlist']);

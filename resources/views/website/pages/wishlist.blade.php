@@ -8,8 +8,8 @@
                     <div class="breadcrumb__text">
                         <h4>Wish List</h4>
                         <div class="breadcrumb__links">
-                            <a href="/master">Home</a>
-                            <a href="/master/shop">Shop</a>
+                            <a href="/">Home</a>
+                            <a href="/shop">Shop</a>
                             <span>Wish List</span>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="shopping__cart__table">
+                    <div class="cart__table">
                         <table>
                             <thead>
                                 <tr>
@@ -47,7 +47,7 @@
                                             </div>
                                             <div class="product__cart__item__text">
                                                 <h6>{{ $item->product_name }}</h6>
-                                                <h5>₹{{ $item->product_mrp }}</h5>
+                                                <h5>₹{{ $item->product_sale }}</h5>
                                             </div>
                                         </td>
                                         <td class="quantity__item">
@@ -57,7 +57,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="cart__price">₹{{ $item->product_mrp }}</td>
+                                        <td class="cart__price">₹{{ $item->product_sale }}</td>
                                         <form action="/remove-from-wishlist" method="post">
                                             @csrf
                                             <input type="hidden" name="wishlistId" value="{{ $item->wishlist_id  }}">

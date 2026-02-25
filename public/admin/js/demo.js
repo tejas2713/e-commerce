@@ -195,7 +195,7 @@ $.notify({
 	title: 'Kaiadmin',
 	message: 'Premium Bootstrap 5 Admin Dashboard',
 },{
-	type: 'secondary',
+	type: 'secondary', 
 	placement: {
 		from: "bottom",
 		align: "right"

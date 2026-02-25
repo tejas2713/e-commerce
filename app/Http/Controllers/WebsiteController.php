@@ -7,6 +7,7 @@ use App\Models\tbl_category;
 use App\Models\tbl_order_child;
 use App\Models\tbl_order_master;
 use App\Models\tbl_product;
+use App\Models\tbl_shipping;
 use App\Models\tbl_subcategory;
 use App\Models\tbl_wishlist;
 use App\Models\User;
@@ -35,6 +36,7 @@ class WebsiteController extends Controller
     }
     function shopingCard()
     {
+
         $cart = DB::table('tbl_cart')
             ->join('tbl_product', 'tbl_cart.cart_product_id', '=', 'tbl_product.product_id')
             ->where('tbl_cart.cart_user_id', Auth::user()->id)
@@ -46,22 +48,30 @@ class WebsiteController extends Controller
 
         return view('website.pages.shoppingCard', compact('cart'));
     }
-    function shopDetails()
+    function shopDetails($id)
     {
-        $product = tbl_product::all();
+       
+        $product = tbl_product::where('product_id', $id)->get();
         return view('website.pages.shopDetails', compact('product'));
     }
     function chackout()
     {
-        return view('website.pages.chackout');
+        $cart = DB::table('tbl_cart')
+            ->join('tbl_product', 'tbl_cart.cart_product_id', '=', 'tbl_product.product_id')
+            ->where('tbl_cart.cart_user_id', Auth::user()->id)
+            ->select(
+                'tbl_cart.*',
+                'tbl_product.*'
+            )
+            ->get();
+        return view('website.pages.chackout', compact('cart'));
     }
 
     function addToChackout(Request $request)
     {
         $orderMaster = new tbl_order_master();
         $orderMaster->order_master_user_id = $request->userId;
-        $orderMaster->order_master_total = $request->total;
-        $orderMaster->order_master_total = $request->total;
+        $orderMaster->order_master_total = $request->totalAmount;
         $orderMaster->order_master_paymentstatus = "Pending";
         $orderMaster->order_master_paymentmethod = "cash on delivery ";
         $orderMaster->order_master_orderstatus = "Processing";
@@ -79,15 +89,25 @@ class WebsiteController extends Controller
             $orderChild->order_child_product_id = $item->cart_product_id;
             $orderChild->order_child_cart_price = $item->cart_price;
             $orderChild->order_child_cart_quantity = $item->cart_quantity;
-            $orderChild->order_child_cart_total = $item->cart_total;
+            $orderChild->order_child_cart_total = $item->cart_price * $item->cart_quantity;
 
             $orderChild->save();
         }
+
+        return redirect('/chackout');
+    }
+    function placeOrder(Request $request)
+    {
+        $shipping = new tbl_shipping();
+        $shipping->shipping_user_id = $request->userId;
+        $shipping->shipping_address = $request->streetAddress;
+        $shipping->shipping_pin_code = $request->pinCode;
+        $shipping->save();
         $cart = tbl_cart::where('cart_user_id', $request->userId)->get();
         foreach ($cart as $item) {
             $item->delete();
         }
-        return redirect('/chackout');
+        return redirect('/order ');
     }
     function about()
     {
@@ -127,18 +147,33 @@ class WebsiteController extends Controller
 
     function addToCart(Request $request)
     {
+        $product = tbl_product::find($request->productId);
         $cart = new tbl_cart();
         $cart->cart_product_id = $request->productId;
         $cart->cart_user_id = $request->userId;
-        $cart->cart_price = "0";
-        $cart->cart_quantity = "1";
-        $cart->cart_total = "0";
+        $cart->cart_price = $product->product_sale;
+        $cart->cart_quantity = $request->quantity;
+        $cart->cart_total = $product->product_sale * $request->quantity;
+        $cart->save();
+        return redirect('/shoppingCard');
+    }
+
+    function updateToCart(Request $request)
+    {
+        $product = tbl_product::find($request->productId);
+        $cart = tbl_cart::find($request->cartId);
+        $cart->cart_product_id = $request->productId;
+        $cart->cart_user_id = $request->userId;
+        $cart->cart_price = $product->product_sale;
+        $cart->cart_quantity = $request->quantity;
+        $cart->cart_total = $product->product_sale * $request->quantity;
         $cart->save();
         return redirect('/shoppingCard');
     }
 
     function removeFromCart(Request $request)
     {
+
         $cart = tbl_cart::find($request->cartId);
         $cart->delete();
         return redirect('/shoppingCard');

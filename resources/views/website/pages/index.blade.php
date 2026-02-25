@@ -24,7 +24,7 @@
                 @foreach ($product as $item)
                     <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix ">
                         <div class="product__item">
-                            <a href="/shopDetails">
+                            <a href="/shopDetails/{{$item->product_id}}">
                                 <div class="product__item__pic set-bg"
                                     data-setbg="{{ asset('uplode/product/' . $item->product_image) }}">
                                     <span class="label">Details</span>
@@ -50,6 +50,7 @@
                                     @csrf
                                     <input type="hidden" name="productId" value="{{ $item->product_id  }}">
                                     <input type="hidden" name="userId" value="{{ Auth::user()->id ?? 0 }}">
+                                    <input type="hidden" name="quantity" value="1">
 
                                     <button type="submit" class="border-0 bg-0">+ Add To Cart</button>
                                 </form>

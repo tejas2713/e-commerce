@@ -12,6 +12,7 @@
                             <a href="/master/shop">Shop</a>
                             <span>Order Details</span>
                         </div>
+                       
                     </div>
                 </div>
             </div>
@@ -24,7 +25,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="shopping__cart__table">
+                    <div class="cart__table">
                         <table>
                             <thead>
                                 <tr>
@@ -52,12 +53,12 @@
                                         </td>
                                         <td class="quantity__item">
                                             <div class="quantity">
-                                                <div class="pro-qty-2">
-                                                    <input type="text" value="{{ $item->order_child_cart_quantity }}">
-                                                </div>
+                                                
+                                                   {{ $item->order_child_cart_quantity }}
+                                                
                                             </div>
                                         </td>
-                                        <td class="cart__price">₹{{ $item->product_mrp * $item->order_child_cart_quantity}}</td>
+                                        <td class="cart__price">₹{{ $item->order_child_cart_price * $item->order_child_cart_quantity}}</td>
                                         <td class="cart__close"><i class="fa fa-close"></i></td>
                                     </tr>
 

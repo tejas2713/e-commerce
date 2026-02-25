@@ -35,7 +35,7 @@ class CategoryController extends Controller
         $category->category_image = $categoryImageName;
         $category->category_banner_image = $categoryBannerImageName;
         $category->save();
-        return redirect("/admin/category");
+        return redirect("/admin/category")->with("success", "Category Added Successfully");
     }
 
     public function remove(Request $request)

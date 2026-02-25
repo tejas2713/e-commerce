@@ -8,8 +8,8 @@
                     <div class="breadcrumb__text">
                         <h4>Shopping Cart</h4>
                         <div class="breadcrumb__links">
-                            <a href="/master">Home</a>
-                            <a href="/master/shop">Shop</a>
+                            <a href="/">Home</a>
+                            <a href="/shop">Shop</a>
                             <span>Shopping Cart</span>
                         </div>
                     </div>
@@ -39,19 +39,35 @@
                                     <tr>
                                         <td class="product__cart__item">
                                             <div class="product__cart__item__pic">
-                                                <img src="{{ asset('uplode/product/'.$item->product_image)}}" alt="" height="120" width="120">
+                                                <img src="{{ asset('uplode/product/' . $item->product_image)}}" alt=""
+                                                    height="120" width="120">
                                             </div>
                                             <div class="product__cart__item__text">
                                                 <h6>{{ $item->product_name }}</h6>
-                                                <h5>₹{{ $item->product_mrp }}</h5>
+                                                <h5>₹{{ $item->product_sale }}</h5>
                                             </div>
                                         </td>
-                                        <td class="quantity__item">
+                                        <!-- <td class="quantity__item">
                                             <div class="quantity">
                                                 <div class="pro-qty-2">
-                                                    <input type="text" value="1">
+                                                    <input type="text" value="{{ $item->cart_quantity }}" name="quantity">
                                                 </div>
                                             </div>
+                                        </td> -->
+
+                                        <td>
+                                            <form action="/update-to-cart" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="cartId" value="{{ $item->cart_id  }}">
+                                                <input type="hidden" name="productId" value="{{ $item->cart_product_id }}">
+                                                <input type="hidden" name="price" value="{{ $item->cart_price }}">
+                                                <input type="hidden" name="total" value="{{ $item->cart_total }}">
+                                                <input type="hidden" name="userId" value="{{$item->cart_user_id}}">
+                                                <input type="hidden" name="totalAmount" value="{{$cart->sum('cart_total')}}">
+
+                                                <input type="number" name="quantity" value="{{ $item->cart_quantity }}" min="1"
+                                                    class="form-control" style="width:100px" onchange="this.form.submit()">
+                                            </form>
                                         </td>
                                         <td class="cart__price">₹{{ $item->cart_total }}</td>
                                         <form action="/remove-from-cart" method="post">
@@ -70,7 +86,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="continue__btn">
-                                <a href="#">Continue Shopping</a>
+                                <a href="/shop">Continue Shopping</a>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -91,8 +107,8 @@
                     <div class="cart__total">
                         <h6>Cart total</h6>
                         <ul>
-                            <li>Subtotal <span>$ 169.50</span></li>
-                            <li>Total <span>$ 169.50</span></li>
+                            <li>Subtotal <span>{{$cart->sum('cart_total')}}</span></li>
+                            <li>Total <span>{{$cart->sum('cart_total')}}</span></li>
                         </ul>
                         <form action="/chackout" method="post">
                             @csrf
@@ -102,6 +118,8 @@
                                 <input type="hidden" name="quantity" value="{{ $item->cart_quantity }}">
                                 <input type="hidden" name="total" value="{{ $item->cart_total }}">
                                 <input type="hidden" name="userId" value="{{$item->cart_user_id}}">
+                                <input type="hidden" name="totalAmount" value="{{$cart->sum('cart_total')}}">
+
                             @endforeach
 
                             <button type="submit" class="primary-btn btn px-s mx-4">Proceed to checkout</button>
