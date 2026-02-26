@@ -79,3 +79,4 @@ Route::post('/remove-from-wishlist', [App\Http\Controllers\WebsiteController::cl
 
 Route::get('/order', [App\Http\Controllers\WebsiteController::class, 'order']);
 Route::get('/order/view/{id}', [App\Http\Controllers\WebsiteController::class, 'viewOrder']);
+

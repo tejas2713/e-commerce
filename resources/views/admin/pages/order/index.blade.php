@@ -22,6 +22,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">Order Date</th>
                                     <th scope="col">Customwe Name</th>
                                     <th scope="col">Total Amount</th>
                                     <th scope="col">Payment Status</th>
@@ -36,6 +37,7 @@
 
                                     <tr>
                                         <td>{{ $data->order_master_id }}</td>
+                                        <td>{{ $data->created_at }}</td>
                                         <td>{{$data->name}}</td>
                                         <td>{{$data->order_master_total}}</td>
                                         <td>{{$data->order_master_paymentstatus}}</td>
@@ -48,8 +50,8 @@
                                             <div class="d-flex ">
 
                                                 <button type="button" class="bg-transparent border-0"><i
-                                                        class="fa-solid fa-pen-to-square text-primary fs-5 " data-bs-toggle="modal"
-                                                        data-bs-target="#editOrder"></i>
+                                                        class="fa-solid fa-pen-to-square text-primary fs-5 "
+                                                        data-bs-toggle="modal" data-bs-target="#editOrder"></i>
                                                 </button>
 
 

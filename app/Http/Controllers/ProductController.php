@@ -65,7 +65,7 @@ class ProductController extends Controller
         $product->product_op_value = $request->opening_value;
         $product->product_image = $productImageName;
         $product->save();
-        return redirect("/admin/product");
+        return redirect("/admin/product")->with("success", "Product Added Successfully");
     }
 
     public function remove(Request $request)
@@ -73,6 +73,6 @@ class ProductController extends Controller
 
         $product = tbl_product::find($request->product_id);
         $product->delete();
-        return redirect('/admin/product');
+        return redirect('/admin/product')->with("Delete", "Product Deleted Successfully");
     }
 }

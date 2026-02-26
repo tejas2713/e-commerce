@@ -98,6 +98,12 @@ class WebsiteController extends Controller
     }
     function placeOrder(Request $request)
     {
+        if($request->streetAddress == ""){
+            return redirect("/chackout")->with("error","Street Address id required!");
+        }
+        if($request->pinCode == ""){
+            return redirect("/chackout")->with("error","Pin Code is required!");
+        }
         $shipping = new tbl_shipping();
         $shipping->shipping_user_id = $request->userId;
         $shipping->shipping_address = $request->streetAddress;

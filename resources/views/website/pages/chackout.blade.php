@@ -23,6 +23,12 @@
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
+                @if (session("error"))
+                    <div class="alert alert-danger">
+                        {{ session("error") }}
+                    </div>
+                
+                @endif    
                 <form action="/placeOrder" method="POST">
                     @csrf
                     <div class="row">
@@ -33,7 +39,7 @@
 
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
-                                <input type="text" placeholder="Street Address" name="streetAddress" class="checkout__input__add">
+                                <input value="{{ old("streetAddress") }}" type="text" placeholder="Street Address" name="streetAddress" class="checkout__input__add">
                             </div>
                             <div class="checkout__input">
                                 <p>Postcode / ZIP<span>*</span></p>

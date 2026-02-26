@@ -24,6 +24,14 @@ class OrderController extends Controller
     }
     function viewOrder($id)
     {
+        $ordermaster =  DB::table('tbl_order_master')
+            ->join('users', 'tbl_order_master.order_master_user_id', '=', 'users.id')
+            ->select(
+                'tbl_order_master.*',
+                'users.name'
+            )
+            ->get();
+
         $orderChild = DB::table('tbl_order_child')
             ->join('tbl_product', 'tbl_order_child.order_child_product_id', '=', 'tbl_product.product_id')
             ->where('tbl_order_child.order_child_master_id', $id)
@@ -33,7 +41,8 @@ class OrderController extends Controller
             )
             ->get();
 
-        return view('admin.pages.order.view', compact('orderChild'));
+        return view('admin.pages.order.view', compact('orderChild','ordermaster'));
     }
+
 
 }

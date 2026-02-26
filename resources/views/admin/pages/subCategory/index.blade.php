@@ -18,6 +18,18 @@
 
                     </div>
                     <div class="card-body">
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show text-success" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+                        @if (session('Delete'))
+                            <div class="alert alert-danger alert-dismissible fade show text-danger" role="alert">
+                                {{ session('Delete') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
                         <table class="table table-head-bg-success bg-opacity-10">
                             <thead>
                                 <tr>
@@ -41,7 +53,7 @@
                                         <td>
                                             <div class="d-flex ">
                                                 <div
-                                                    onclick="editData('{{ $data->sub_category_id }}','{{ $data->sub_category_name }}','{{ $data->category_id }}','{{ $data->sub_category_image }}')">
+                                                    onclick="editData('{{ $data->sub_category_id }}','{{ $data->sub_category_name }}','{{ $data->category_id }}','{{ $data->sub_category_image }}','{{$data->category_name}}')">
                                                     <button type="button" class="bg-transparent border-0"><i
                                                             class="fa-solid fa-pen-to-square text-primary fs-5 "
                                                             data-bs-toggle="modal" data-bs-target="#editCategory"></i>
@@ -71,15 +83,13 @@
 
     @include("admin.pages.subCategory.edit")
     <script>
-        function editData(sub_category_id, sub_category_name, category_id, sub_category_image) {
-            console.log(sub_category_id);
-            console.log(sub_category_name);
-            console.log(category_id);
-            console.log(sub_category_image);
+        function editData(sub_category_id, sub_category_name, category_id, sub_category_image, category_name) {
+            console.log(category_name);
+
             document.getElementById("subCategoryId").value = sub_category_id;
             document.getElementById("subCategoryName").value = sub_category_name;
-            document.querySelector("select[name='categoryId']").value = category_id;
-            document.getElementById("subCategoryImage").value = sub_category_image;
+            // document.getElementById("subCategoryImage").value = sub_category_image;
+            document.getElementById("old_category").value = category_name;
 
         }
     </script>

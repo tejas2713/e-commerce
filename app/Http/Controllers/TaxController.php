@@ -19,14 +19,14 @@ class TaxController extends Controller
         $tax->tax_name = $request->taxName;
         $tax->tax_per = $request->taxPer;
         $tax->save();
-        return redirect("/admin/tax");
+        return redirect("/admin/tax")->with("success", "Tax Added Successfully");
     }
     public function remove(Request $request)
     {
 
         $tax = tbl_tax::find($request->tax_id);
         $tax->delete();
-        return redirect('/admin/tax');
+        return redirect('/admin/tax')->with("Delete", "Tax Deleted Successfully");
     }
     public function edit(Request $request)
     {
@@ -36,7 +36,7 @@ class TaxController extends Controller
         $tax->tax_per = $request->taxPer;
 
         $tax->save();
-        return redirect('/admin/tax');
+        return redirect('/admin/tax')->with("success", "Unit Update Successfully");
     }
 
 }

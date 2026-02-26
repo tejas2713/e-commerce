@@ -15,6 +15,7 @@ class CategoryController extends Controller
     }
     function store(Request $request)
     {
+      
         $category = new tbl_category();
         $path = public_path('uplode/category');
         $categoryImage = $request->file('categoryImage');
@@ -31,9 +32,9 @@ class CategoryController extends Controller
             $categoryBannerImage->move($path, $categoryBannerImageName);
         }
 
+        $category->category_banner_image = $categoryBannerImageName;
         $category->category_name = $request->categoryName;
         $category->category_image = $categoryImageName;
-        $category->category_banner_image = $categoryBannerImageName;
         $category->save();
         return redirect("/admin/category")->with("success", "Category Added Successfully");
     }
@@ -43,7 +44,7 @@ class CategoryController extends Controller
 
         $category = tbl_category::find($request->category_id);
         $category->delete();
-        return redirect('/admin/category');
+        return redirect('/admin/category')->with("Delete", "Category Remove Successfully");
     }
     public function edit(Request $request)
     {
@@ -56,6 +57,7 @@ class CategoryController extends Controller
         if ($categoryImage) {
             $categoryImageName = time() . "category.png";
             $categoryImage->move($path, $categoryImageName);
+            $category->category_image = $categoryImageName;
         }
 
         $categoryBannerImage = $request->file('categoryBannerImage');
@@ -63,13 +65,12 @@ class CategoryController extends Controller
         if ($categoryBannerImage) {
             $categoryBannerImageName = time() . "banner.png";
             $categoryBannerImage->move($path, $categoryBannerImageName);
+            $category->category_banner_image = $categoryBannerImageName;
         }
         
         $category->category_name = $request->categoryName;
-        $category->category_image = $categoryImageName;
-        $category->category_banner_image = $categoryBannerImageName;
         $category->save();
-        return redirect('/admin/category');
+        return redirect('/admin/category')->with("success", "Category Updated Successfully");
     }
 
 }

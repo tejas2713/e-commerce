@@ -15,6 +15,10 @@
                     <input type="hidden" name="subCategoryId" id="subCategoryId">
                     <div class="row mx-2">
                         <div class="form-group has-success">
+                            <label for="categoryId">Old Category</label>
+                            <input type="text" class="form-control" id="old_category" readonly disabled />
+                        </div>
+                        <div class="form-group has-success">
                             <label for="categoryId">Category</label>
                             <select id="categoryId" class="form-select form-control" aria-label="Default select example"
                                 name="categoryId">

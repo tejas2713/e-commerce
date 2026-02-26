@@ -8,7 +8,7 @@
                 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/admin/category/edit" method="post">
+            <form action="/admin/category/edit" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="category_id" id="categoryId">
                 <div class="modal-body">
