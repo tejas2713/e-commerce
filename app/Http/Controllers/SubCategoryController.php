@@ -51,7 +51,6 @@ class SubCategoryController extends Controller
     {
 
         $subCategory = tbl_subcategory::find($request->subCategoryId);
-
         $path = public_path('uplode/subCategory');
         $subCategoryImage = $request->file('subCategoryImage');
         $subCategoryImageName = "";
@@ -60,11 +59,13 @@ class SubCategoryController extends Controller
             $subCategoryImage->move($path, $subCategoryImageName);
             $subCategory->sub_category_image = $subCategoryImageName;
         }
-
+        if ($request->categoryId != "") {
+            $subCategory->category_id = $request->categoryId;
+        }
         $subCategory->sub_category_name = $request->editSubCategoryName;
-        $subCategory->category_id = $request->categoryId;
+
         $subCategory->save();
-        return redirect('/admin/subCategory')->with("success","Sub Category Updated Successfully");
+        return redirect('/admin/subCategory')->with("success", "Sub Category Updated Successfully");
     }
 
 

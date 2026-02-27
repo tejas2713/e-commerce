@@ -89,8 +89,8 @@
             console.log(tax_name);
             console.log(tax_per);
             document.getElementById("taxId").value = tax_id;
-            document.getElementById("taxName").value = tax_name;
-            document.getElementById("taxPer").value = tax_per;
+            document.getElementById("edittaxName").value = tax_name;
+            document.getElementById("edittaxPer").value = tax_per;
         }
     </script>
 @endsection

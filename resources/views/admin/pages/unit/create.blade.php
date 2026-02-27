@@ -1,13 +1,13 @@
-<button type="button" class="btn btn-success  " data-bs-toggle="modal" data-bs-target="#addCategory">
+<button type="button" class="btn btn-success  " data-bs-toggle="modal" data-bs-target="#addunit">
     + Add Unit
 </button>
 
 <!-- Modal -->
-<div class="modal fade " id="addCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade " id="addunit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
 
         <div class="modal-content">
-            <form action="/admin/unit" method="post">
+            <form action="/admin/unit" method="post" onsubmit="check()">
                 @csrf
 
                 <div class="modal-header">
@@ -17,8 +17,9 @@
                 <div class="modal-body">
                     <div class="row mx-2">
                         <div class="form-group has-success">
-                            <label for="successInput">Unit Name</label>
-                            <input type="text" id="successInput" name="unitName" placeholder="Unit Name"
+                            <label for="unitName">Unit Name</label>
+                             <small id="nameError" style="color:red;"></small>
+                            <input type="text" id="unitName" name="unitName" placeholder="Unit Name"
                                 class="form-control">
                         </div>
                     </div>
@@ -34,3 +35,18 @@
 
     </div>
 </div>
+<script>
+   function check() {
+        var unitName = document.getElementById("unitName").value;
+        var error = document.getElementById("nameError");
+
+        if (unitName.trim() == "") {
+            event.preventDefault();
+            error.innerHTML = "Unit Name is Required";
+            return false;
+        } else {
+            error.innerHTML = "";
+            return true;
+        }
+    }
+</script>

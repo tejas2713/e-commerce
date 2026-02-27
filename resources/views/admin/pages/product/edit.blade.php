@@ -1,6 +1,4 @@
-<button type="button" class="bg-transparent border-0"><i class="fa-solid fa-pen-to-square text-primary fs-5 "
-        data-bs-toggle="modal" data-bs-target="#editProduct"></i>
-</button>
+
 <!-- Modal -->
 
 <div class="modal fade" id="editProduct" tabindex="-1" aria-labelledby="exampleModalXlLabel" aria-hidden="true">
@@ -19,25 +17,26 @@
                     </div>
                 </div>
                 <form action="/admin/product" method="post" enctype="multipart/form-data">
+                    <input type="text" id="productId">
                     @csrf
                     <div class="row mx-2" style="border:1px solid green">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="productName">Product Name</label>
-                                <input type="text" id="productName" name="productName" placeholder="Product Name"
+                                <label for="editproductName">Product Name</label>
+                                <input type="text" id="editproductName" name="productName" placeholder="Product Name"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="hsn">HSN Code</label>
-                                <input type="text" id="hsn" name="hsn" placeholder="HSN Code" class="form-control">
+                                <label for="edithsn">HSN Code</label>
+                                <input type="text" id="edithsn" name="edithsn" placeholder="HSN Code" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="productWeight">Product Weight</label>
-                                <input type="text" id="productWeight" name="productWeight" placeholder="Product Weight"
+                                <label for="editproductWeight">Product Weight</label>
+                                <input type="text" id="editproductWeight" name="productWeight" placeholder="Product Weight"
                                     class="form-control">
                             </div>
                         </div>

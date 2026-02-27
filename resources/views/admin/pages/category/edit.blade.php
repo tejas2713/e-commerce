@@ -8,13 +8,14 @@
                 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/admin/category/edit" method="post" enctype="multipart/form-data">
+            <form action="/admin/category/edit" method="post" enctype="multipart/form-data" onclick="check()">
                 @csrf
                 <input type="hidden" name="category_id" id="categoryId">
                 <div class="modal-body">
                     <div class="row mx-2">
                         <div class="form-group">
                             <label for="categoryName">Category Name</label>
+                            <small id="nameError" style="color:red;"></small>
                             <input type="text" id="categoryName" placeholder="Category Name" name="categoryName"
                                 class="form-control">
                         </div>
@@ -48,3 +49,18 @@
         </div>
     </div>
 </div>
+<script>
+    function check() {
+        var categoryName = document.getElementById("categoryName").value;
+        var error = document.getElementById("nameError");
+
+        if (categoryName.trim() == "") {
+            event.preventDefault();
+            error.innerHTML = "Category Name is Required";
+            return false;
+        } else {
+            error.innerHTML = "";
+            return true;
+        }
+    }
+</script>

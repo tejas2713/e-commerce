@@ -12,17 +12,19 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/admin/tax" method="post">
+                <form action="/admin/tax" method="post" onsubmit="check()">
                     @csrf
                     <div class="row mx-2">
                         <div class="form-group has-success">
-                            <label for="successInput">Tax Name</label>
-                            <input type="text" id="successInput" name="taxName" placeholder="Tax Name"
-                                class="form-control">
+                            <label for="taxName">Tax Name</label>
+                            <small id="taxNameError" style="color:red;"></small>
+                            <input type="text" id="taxName" name="taxName" placeholder="Tax Name" class="form-control">
+
                         </div>
                         <div class="form-group has-success">
-                            <label for="successInput">Tax Percentage</label>
-                            <input type="number" id="successInput" name="taxPer" placeholder="Tax Percentage"
+                            <label for="taxPer">Tax Percentage</label>
+                            <small id="taxPerError" style="color:red;"></small>
+                            <input type="number" id="taxPer" name="taxPer" placeholder="Tax Percentage"
                                 class="form-control">
                         </div>
                     </div>
@@ -38,3 +40,31 @@
 
     </div>
 </div>
+
+
+<script>
+    function check() {
+
+        var taxName = document.getElementById("taxName").value;
+        var error = document.getElementById("taxNameError");
+        var taxPer = document.getElementById("taxPer").value;
+        var taxPerError = document.getElementById("taxPerError");
+
+        if (taxName.trim() == "") {
+            event.preventDefault();
+            error.innerHTML = "Tax Name is Required";
+            return false;
+        }
+        if (taxPer.trim() == "") {
+            event.preventDefault();
+            taxPerError.innerHTML = "Tax Percentage is Required";
+            return false;
+        }
+        else {
+            error.innerHTML = "";
+            taxPerError.innerHTML = "";
+            return true;
+        }
+    }
+
+</script>

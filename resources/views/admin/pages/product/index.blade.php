@@ -22,13 +22,13 @@
                     </div>
                     <div class="card-body">
                         @if (session('success'))
-                        <div class="alert alert-success alert-dismissible fade show text-success" role="alert">
+                            <div class="alert alert-success alert-dismissible fade show text-success" role="alert">
                                 {{ session('success') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         @endif
                         @if (session('Delete'))
-                        <div class="alert alert-danger alert-dismissible fade show text-danger" role="alert">
+                            <div class="alert alert-danger alert-dismissible fade show text-danger" role="alert">
                                 {{ session('Delete') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
@@ -53,7 +53,7 @@
                                     <tr>
                                         <td>{{$data->product_id }}</td>
 
-                                        <td><img src="{{ asset('uplode/product/'.$data->product_image) }}" alt=""
+                                        <td><img src="{{ asset('uplode/product/' . $data->product_image) }}" alt=""
                                                 style="height:100px; width:100px" class="rounded-4"></td>
                                         <td>{{$data->product_name}}</td>
                                         <td>{{ $data->tax_name }}</td>
@@ -62,7 +62,14 @@
                                         <td>ACTIVE</td>
                                         <td>
                                             <div class="d-flex ">
-                                                @include("admin.pages.product.edit")
+                                                <div
+                                                    onclick="editData('{{ $data->product_id }}','{{ $data->product_name }}','{{ $data->product_hsn }}','{{ $data->product_weight }}')">
+                                                    <button type="button" class="bg-transparent border-0"><i
+                                                            class="fa-solid fa-pen-to-square text-primary fs-5 "
+                                                            data-bs-toggle="modal" data-bs-target="#editProduct"></i>
+                                                    </button>
+
+                                                </div>
                                                 <form action="/admin/product/delete" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="product_id" value="{{ $data->product_id }}">
@@ -84,4 +91,13 @@
             </div>
         </div>
     </div>
+    @include("admin.pages.product.edit")
+    <script>
+        function editData(product_id, product_name, product_hsn, product_weight) {
+            document.getElementById("editproductName").value = product_name;
+            document.getElementById("edithsn").value = product_hsn;
+            document.getElementById("editproductWeight").value = product_weight;
+            document.getElementById("productId").value = product_id;
+        }
+    </script>
 @endsection

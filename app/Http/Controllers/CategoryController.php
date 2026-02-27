@@ -15,7 +15,7 @@ class CategoryController extends Controller
     }
     function store(Request $request)
     {
-      
+    
         $category = new tbl_category();
         $path = public_path('uplode/category');
         $categoryImage = $request->file('categoryImage');

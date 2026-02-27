@@ -56,7 +56,7 @@
                                                     onclick="editData('{{ $data->sub_category_id }}','{{ $data->sub_category_name }}','{{ $data->category_id }}','{{ $data->sub_category_image }}','{{$data->category_name}}')">
                                                     <button type="button" class="bg-transparent border-0"><i
                                                             class="fa-solid fa-pen-to-square text-primary fs-5 "
-                                                            data-bs-toggle="modal" data-bs-target="#editCategory"></i>
+                                                            data-bs-toggle="modal" data-bs-target="#editSubCategory"></i>
                                                     </button>
 
                                                 </div>
@@ -85,9 +85,10 @@
     <script>
         function editData(sub_category_id, sub_category_name, category_id, sub_category_image, category_name) {
             console.log(category_name);
+            console.log(sub_category_name);
 
             document.getElementById("subCategoryId").value = sub_category_id;
-            document.getElementById("subCategoryName").value = sub_category_name;
+            document.getElementById("editSubCategoryName").value = sub_category_name;
             // document.getElementById("subCategoryImage").value = sub_category_image;
             document.getElementById("old_category").value = category_name;
 

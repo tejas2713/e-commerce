@@ -1,12 +1,12 @@
 <!-- Modal -->
 
 
-<div class="modal fade " id="editCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade " id="editSubCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
 
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Create Category</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Sub Category</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -14,14 +14,15 @@
                     @csrf
                     <input type="hidden" name="subCategoryId" id="subCategoryId">
                     <div class="row mx-2">
-                        <div class="form-group has-success">
+                        <div class="form-group">
                             <label for="categoryId">Old Category</label>
                             <input type="text" class="form-control" id="old_category" readonly disabled />
                         </div>
-                        <div class="form-group has-success">
+                        <div class="form-group">
                             <label for="categoryId">Category</label>
                             <select id="categoryId" class="form-select form-control" aria-label="Default select example"
                                 name="categoryId">
+                                <option value="">Select New Category</option>
                                 @foreach ($category as $data)
                                     <option   value="{{ $data->category_id  }}">
                                         {{$data->category_name}}
@@ -30,9 +31,9 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group has-success">
-                            <label for="subCategoryName">Sub Category Name</label>
-                            <input type="text" id="subCategoryName" name="editSubCategoryName"
+                        <div class="form-group">
+                            <label for="editSubCategoryName">Sub Category Name</label>
+                            <input type="text" id="editSubCategoryName" name="editSubCategoryName"
                                 placeholder="Sub Category Name" class="form-control">
                         </div>
                     </div>

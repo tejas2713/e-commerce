@@ -29,11 +29,12 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
+                                    <th>Order Date</th>
                                     <th>Total</th>
                                     <th>Payment Status</th>
                                     <th>Payment Method</th>
                                     <th>Order Status</th>
-                                    <th>view</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,7 +44,8 @@
 
                                     <tr>
                                         <td class="cart__price">{{ $item->order_master_id }}</td>
-                                        <td class="cart__price">{{ $item->order_master_total }}</td>
+                                        <td class="cart__price">{{ $item->created_at}}</td>
+                                        <td class="cart__price text-center">{{ $item->order_master_total }}</td>
                                         <td class="cart__price">{{ $item->order_master_paymentstatus }}</td>
                                         <td class="cart__price">{{ $item->order_master_paymentmethod }}</td>
                                         <td class="cart__price">{{ $item->order_master_orderstatus }}</td>

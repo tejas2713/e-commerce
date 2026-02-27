@@ -92,7 +92,7 @@
             console.log(unit_id);
             console.log(unit_name);
             document.getElementById("UnitId").value = unit_id;
-            document.getElementById("UnitName").value = unit_name;
+            document.getElementById("editUnitName").value = unit_name;
         }
     </script>
 @endsection

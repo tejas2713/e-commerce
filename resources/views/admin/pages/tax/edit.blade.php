@@ -13,12 +13,12 @@
                     <input type="hidden" name="tax_id" id="taxId">
                     <div class="row mx-2">
                         <div class="form-group has-success">
-                            <label for="taxName">Tax Name</label>
-                            <input type="text" id="taxName" placeholder="Tax Name" name="taxName" class="form-control">
+                            <label for="edittaxName">Tax Name</label>
+                            <input type="text" id="edittaxName" placeholder="Tax Name" name="edittaxName" class="form-control">
                         </div>
                         <div class="form-group has-success">
-                            <label for="taxPer">Tax Percentage</label>
-                            <input type="number" id="taxPer" placeholder="Tax Percentage"name="taxPer" class="form-control">
+                            <label for="edittaxPer">Tax Percentage</label>
+                            <input type="number" id="edittaxPer" placeholder="Tax Percentage"name="edittaxPer" class="form-control">
                         </div>
                     </div>
 

@@ -14,7 +14,7 @@
                     <div class="row mx-2">
                         <div class="form-group has-success">
                             <label for="editUnitName">Unit Name</label>
-                            <input type="text" id="UnitName" placeholder="Unit Name" name="unitName"
+                            <input type="text" id="editUnitName" placeholder="Unit Name" name="unitName"
                                 class="form-control" value="">
                         </div>
                     </div>

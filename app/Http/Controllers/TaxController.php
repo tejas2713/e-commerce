@@ -32,8 +32,8 @@ class TaxController extends Controller
     {
 
         $tax = tbl_tax::find($request->tax_id);
-        $tax->tax_name = $request->taxName;
-        $tax->tax_per = $request->taxPer;
+        $tax->tax_name = $request->edittaxName;
+        $tax->tax_per = $request->edittaxPer;
 
         $tax->save();
         return redirect('/admin/tax')->with("success", "Unit Update Successfully");
