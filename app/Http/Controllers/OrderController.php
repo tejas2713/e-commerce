@@ -22,9 +22,21 @@ class OrderController extends Controller
 
         return view('admin.pages.order.index', compact('order'));
     }
+
+    function remove(Request $request)
+    {
+
+        $orderMaster = tbl_order_master::find($request->orderMasterId);
+        $orderChild = tbl_order_child::where('order_child_master_id', $request->orderMasterId)->get();
+        foreach ($orderChild as $data) {
+            $data->delete();
+        }
+        $orderMaster->delete();
+        return redirect('/admin/order')->with("Delete", "Order Remove Successfully");
+    }
     function viewOrder($id)
     {
-        $ordermaster =  DB::table('tbl_order_master')
+        $ordermaster = DB::table('tbl_order_master')
             ->join('users', 'tbl_order_master.order_master_user_id', '=', 'users.id')
             ->select(
                 'tbl_order_master.*',
@@ -41,7 +53,7 @@ class OrderController extends Controller
             )
             ->get();
 
-        return view('admin.pages.order.view', compact('orderChild','ordermaster'));
+        return view('admin.pages.order.view', compact('orderChild', 'ordermaster'));
     }
 
 

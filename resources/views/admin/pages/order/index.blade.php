@@ -48,16 +48,21 @@
 
                                         <td>
                                             <div class="d-flex ">
-
+                                                <a href="/admin/order/view/{{ $data->order_master_id }}"><i
+                                                        class="fa fa-eye fs-5"></i></a>
                                                 <button type="button" class="bg-transparent border-0"><i
                                                         class="fa-solid fa-pen-to-square text-primary fs-5 "
                                                         data-bs-toggle="modal" data-bs-target="#editOrder"></i>
                                                 </button>
 
+                                                <form action="/admin/order/delete" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="orderMasterId"
+                                                        value="{{ $data->order_master_id }}">
+                                                    <button class="bg-transparent border-0"> <i
+                                                            class="fa-solid fa-trash-alt text-danger fs-5 "></i></button>
 
-
-                                                <a href="/admin/order/view/{{ $data->order_master_id }}"><i
-                                                        class="fa fa-eye"></i></a>
+                                                </form>
                                             </div>
                                         </td>
 
