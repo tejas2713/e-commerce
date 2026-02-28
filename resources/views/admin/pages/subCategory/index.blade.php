@@ -52,14 +52,13 @@
 
                                         <td>
                                             <div class="d-flex ">
-                                                <div
-                                                    onclick="editData('{{ $data->sub_category_id }}','{{ $data->sub_category_name }}','{{ $data->category_id }}','{{ $data->sub_category_image }}','{{$data->category_name}}')">
-                                                    <button type="button" class="bg-transparent border-0"><i
-                                                            class="fa-solid fa-pen-to-square text-primary fs-5 "
-                                                            data-bs-toggle="modal" data-bs-target="#editSubCategory"></i>
-                                                    </button>
+                                                <button type="button" class="bg-transparent border-0" data-bs-toggle="modal"
+                                                    data-bs-target="#editSubCategory" onclick="editData('{{ $data->sub_category_id }}',
+                                                      '{{ $data->sub_category_name }}',
+                                                      '{{ $data->category_id }}')">
 
-                                                </div>
+                                                    <i class="fa-solid fa-pen-to-square text-primary fs-5"></i>
+                                                </button>
                                                 <form action="/admin/subCategory/delete" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="subCategoryId"
@@ -83,15 +82,13 @@
 
     @include("admin.pages.subCategory.edit")
     <script>
-        function editData(sub_category_id, sub_category_name, category_id, sub_category_image, category_name) {
-            console.log(category_name);
-            console.log(sub_category_name);
+        function editData(id, name, categoryId) {
 
-            document.getElementById("subCategoryId").value = sub_category_id;
-            document.getElementById("editSubCategoryName").value = sub_category_name;
-            // document.getElementById("subCategoryImage").value = sub_category_image;
-            document.getElementById("old_category").value = category_name;
+            document.getElementById("subCategoryId").value = id;
+            document.getElementById("editSubCategoryName").value = name;
 
+            // set selected category
+            document.getElementById("editcategoryId").value = categoryId;
         }
     </script>
 @endsection

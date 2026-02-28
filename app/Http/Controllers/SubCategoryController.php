@@ -49,23 +49,25 @@ class SubCategoryController extends Controller
     }
     public function edit(Request $request)
     {
+        $subCategory = tbl_subcategory::find($request->editsubCategoryId);
 
-        $subCategory = tbl_subcategory::find($request->subCategoryId);
-        $path = public_path('uplode/subCategory');
-        $subCategoryImage = $request->file('subCategoryImage');
-        $subCategoryImageName = "";
-        if ($subCategoryImage) {
-            $subCategoryImageName = time() . "subCategory.png";
-            $subCategoryImage->move($path, $subCategoryImageName);
-            $subCategory->sub_category_image = $subCategoryImageName;
+        if (!$subCategory) {
+            return redirect()->back()->with('error', 'Sub Category Not Found');
         }
-        if ($request->categoryId != "") {
-            $subCategory->category_id = $request->categoryId;
+
+        $path = public_path('uplode/subCategory');
+        if ($request->hasFile('editsubCategoryImage')) {
+            $image = $request->file('editsubCategoryImage');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move($path, $imageName);
+            $subCategory->sub_category_image = $imageName;
         }
         $subCategory->sub_category_name = $request->editSubCategoryName;
-
+        $subCategory->category_id = $request->editcategoryId;
         $subCategory->save();
-        return redirect('/admin/subCategory')->with("success", "Sub Category Updated Successfully");
+
+        return redirect('/admin/subCategory')
+            ->with("success", "Sub Category Updated Successfully");
     }
 
 

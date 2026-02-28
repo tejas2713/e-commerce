@@ -50,11 +50,13 @@
                                             <div class="d-flex ">
                                                 <a href="/admin/order/view/{{ $data->order_master_id }}"><i
                                                         class="fa fa-eye fs-5"></i></a>
-                                                <button type="button" class="bg-transparent border-0"><i
-                                                        class="fa-solid fa-pen-to-square text-primary fs-5 "
-                                                        data-bs-toggle="modal" data-bs-target="#editOrder"></i>
-                                                </button>
+                                                <div onclick="editData('{{ $data->order_master_id }}')" class="mx-2">
+                                                    <button type="button" class="bg-transparent border-0"><i
+                                                            class="fa-solid fa-pen-to-square text-primary fs-5 "
+                                                            data-bs-toggle="modal" data-bs-target="#editorder"></i>
+                                                    </button>
 
+                                                </div>
                                                 <form action="/admin/order/delete" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="orderMasterId"
@@ -79,4 +81,10 @@
             </div>
         </div>
     </div>
+    <!-- @include("admin.pages.order.edit") -->
+    <script>
+        function editData(orderId) {
+          document.getElementById("orderMasterId").value = orderId;
+        }
+    </script>
 @endsection

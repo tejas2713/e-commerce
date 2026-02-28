@@ -49,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/order', [OrderController::class, 'index']);
     Route::post('/admin/order/delete', [OrderController::class, 'remove']);
+    Route::post('/admin/order/edit', [OrderController::class, 'edit']);
     Route::get('/admin/order/view/{id}', [OrderController::class, 'viewOrder']);
 
 });

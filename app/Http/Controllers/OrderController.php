@@ -34,6 +34,14 @@ class OrderController extends Controller
         $orderMaster->delete();
         return redirect('/admin/order')->with("Delete", "Order Remove Successfully");
     }
+    public function edit(Request $request)
+    {
+
+        $order = tbl_order_master::find($request->orderMasterId);
+        $order->order_master_status = $request->orderStatus;
+        $order->save();
+        return redirect('/admin/order')->with("success", "Order Updated Successfully");
+    }
     function viewOrder($id)
     {
         $ordermaster = DB::table('tbl_order_master')
