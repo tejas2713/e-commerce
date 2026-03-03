@@ -46,15 +46,17 @@ class OrderController extends Controller
         $order->save();
         return redirect('/admin/order')->with("success", "Order Updated Successfully");
     }
+
     function viewOrder($id)
     {
         $ordermaster = DB::table('tbl_order_master')
             ->join('users', 'tbl_order_master.order_master_user_id', '=', 'users.id')
+            ->where('tbl_order_master.order_master_id', $id)
             ->select(
                 'tbl_order_master.*',
-                'users.name'
+                'users.*'
             )
-            ->get();
+            ->first();
 
         $orderChild = DB::table('tbl_order_child')
             ->join('tbl_product', 'tbl_order_child.order_child_product_id', '=', 'tbl_product.product_id')
@@ -67,6 +69,5 @@ class OrderController extends Controller
 
         return view('admin.pages.order.view', compact('orderChild', 'ordermaster'));
     }
-
 
 }

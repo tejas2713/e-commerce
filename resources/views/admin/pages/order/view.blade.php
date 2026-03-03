@@ -18,6 +18,49 @@
 
                     </div>
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table table-bordered ">
+                                    <tr>
+                                        <th class="bg-success">Order id</th>
+                                        <td class="w-50">{{ $ordermaster->order_master_id  }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bg-success">Customer</th>
+                                        <td class="w-50">{{ $ordermaster->name  }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bg-success">Total Price</th>
+                                        <td class="w-50">{{ $ordermaster->order_master_total }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bg-success">Shopping Address</th>
+                                        <td class="w-50">2</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="col-md-6">
+                                <table class="table table-bordered ">
+                                    <tr>
+                                        <th class="bg-success">Payment Method</th>
+                                        <td class="w-50">{{ $ordermaster->order_master_paymentmethod }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bg-success">Payment Status</th>
+                                        <td class="w-50">{{ $ordermaster->order_master_paymentstatus }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bg-success">Order Status</th>
+                                        <td class="w-50">{{ $ordermaster->order_master_orderstatus }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bg-success">Reciver Name</th>
+                                        <td class="w-50">2</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                         <table class="table table-head-bg-success bg-opacity-10">
                             <thead>
                                 <tr>
@@ -42,7 +85,7 @@
                                         <td>{{ $data->product_name }}</td>
                                         <td>{{ $data->order_child_cart_price }}</td>
                                         <td>{{ $data->order_child_cart_quantity }}</td>
-                                        <td>{{ $data->order_child_cart_price *$data->order_child_cart_quantity}}</td>
+                                        <td>{{ $data->order_child_cart_price * $data->order_child_cart_quantity}}</td>
                                     </tr>
                                 @endforeach
 
