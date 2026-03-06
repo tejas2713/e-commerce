@@ -10,7 +10,7 @@
 
             <form action="/admin/order/edit" method="post">
                 @csrf
-                <input type="hidden" name="orderMasterId" id="orderId">
+                <input type="text" name="orderMasterId" id="orderId">
 
                 <div class="modal-body">
 
@@ -25,6 +25,7 @@
                         <!-- Customer Name -->
                         <div class="col-md-12">
                             <label class="form-label">Customer Name</label>
+                            <input type="hidden" name="userId" id="userId">
                             <input type="text" id="customer_name" name="customer_name" class="form-control" readonly>
                         </div>
 

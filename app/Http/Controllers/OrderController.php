@@ -37,13 +37,15 @@ class OrderController extends Controller
     public function edit(Request $request)
     {
 
+
         $order = tbl_order_master::find($request->orderMasterId);
-        $order->order_master_user_id = $request->customer_name;
-        $order->order_master_total = $request->orderTotalAmount;
-        $order->order_master_paymentmethod = $request->paymentMethod;
-        $order->order_master_paymentstatus = $request->paymentStatus;
-        $order->order_master_orderstatus = $request->orderStatus;
+        $order->order_master_user_id = $request->userId;
+        $order->order_master_total = $request->total_amount;
+        $order->order_master_paymentmethod = $request->payment_method;
+        $order->order_master_paymentstatus = $request->payment_status;
+        $order->order_master_orderstatus = $request->order_status;
         $order->save();
+
         return redirect('/admin/order')->with("success", "Order Updated Successfully");
     }
 

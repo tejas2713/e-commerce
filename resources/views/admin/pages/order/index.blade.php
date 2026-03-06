@@ -50,7 +50,7 @@
                                             <div class="d-flex ">
                                                 <a href="/admin/order/view/{{ $data->order_master_id }}"><i
                                                         class="fa fa-eye fs-5"></i></a>
-                                                <div onclick="editData('{{ $data->order_master_id }}', '{{ $data->name }}', '{{ $data->order_master_total }}', '{{ $data->order_master_paymentstatus }}', '{{ $data->order_master_paymentmethod }}', '{{ $data->order_master_orderstatus }}', '{{ $data->created_at }}')"
+                                                <div onclick="editData('{{ $data->order_master_id }}', '{{ $data->order_master_user_id }}', '{{ $data->name }}', '{{ $data->order_master_total }}', '{{ $data->order_master_paymentstatus }}', '{{ $data->order_master_paymentmethod }}', '{{ $data->order_master_orderstatus }}', '{{ $data->created_at }}')"
                                                     class="mx-2">
                                                     <button type="button" class="bg-transparent border-0"><i
                                                             class="fa-solid fa-pen-to-square text-primary fs-5 "
@@ -84,14 +84,15 @@
     </div>
     @include("admin.pages.order.edit")
     <script>
-        function editData(orderId, userId, totalAmount, paymentStatus, paymentMethod, orderStatus, orderDate) {
+        function editData(orderId, userId, customerName, totalAmount, paymentStatus, paymentMethod, orderStatus, orderDate) {
+            document.getElementById("orderId").value = orderId;
             document.getElementById("orderDate").value = orderDate;
-            document.getElementsByName("customer_name")[0].value = userId;
+            document.getElementsByName("userId")[0].value = userId;
+            document.getElementsByName("customer_name")[0].value = customerName;
             document.getElementsByName("total_amount")[0].value = totalAmount;
             document.getElementsByName("payment_status")[0].value = paymentStatus;
             document.getElementsByName("payment_method")[0].value = paymentMethod;
             document.getElementsByName("order_status")[0].value = orderStatus;
-            document.getElementById("orderMasterId").value = orderId;
         }
     </script>
 @endsection
