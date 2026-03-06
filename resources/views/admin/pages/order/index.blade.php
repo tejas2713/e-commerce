@@ -50,7 +50,7 @@
                                             <div class="d-flex ">
                                                 <a href="/admin/order/view/{{ $data->order_master_id }}"><i
                                                         class="fa fa-eye fs-5"></i></a>
-                                                <div onclick="editData('{{ $data->order_master_id }}', '{{ $data->order_master_user_id }}', '{{ $data->order_master_total }}', '{{ $data->order_master_paymentstatus }}', '{{ $data->order_master_paymentmethod }}', '{{ $data->order_master_orderstatus }}', '{{ $data->created_at }}')"
+                                                <div onclick="editData('{{ $data->order_master_id }}', '{{ $data->name }}', '{{ $data->order_master_total }}', '{{ $data->order_master_paymentstatus }}', '{{ $data->order_master_paymentmethod }}', '{{ $data->order_master_orderstatus }}', '{{ $data->created_at }}')"
                                                     class="mx-2">
                                                     <button type="button" class="bg-transparent border-0"><i
                                                             class="fa-solid fa-pen-to-square text-primary fs-5 "
