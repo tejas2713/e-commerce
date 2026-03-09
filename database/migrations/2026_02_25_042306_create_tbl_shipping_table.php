@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('shipping_address');
             $table->string('shipping_pin_code');
             $table->integer('shipping_user_id');
+            $table->string('shipping_receiver_name')->nullable();
             $table->timestamps();
         });
     }

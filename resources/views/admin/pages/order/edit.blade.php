@@ -10,7 +10,7 @@
 
             <form action="/admin/order/edit" method="post">
                 @csrf
-                <input type="text" name="orderMasterId" id="orderId">
+                <input type="hidden" name="orderMasterId" id="orderId">
 
                 <div class="modal-body">
 

@@ -24,6 +24,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                    @if(session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    @endif
                     <div class="cart__table">
                         <table>
                             <thead>
@@ -76,5 +82,13 @@
             </div>
         </div>
     </section>
+    <script>
+        setTimeout(function () {
+            let alert = document.querySelector('.alert');
+            if (alert) {
+                alert.remove();
+            }
+        }, 3000);
+    </script>
     <!-- wish list Section End -->
 @endsection

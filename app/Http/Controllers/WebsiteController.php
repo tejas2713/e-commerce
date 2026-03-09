@@ -50,7 +50,7 @@ class WebsiteController extends Controller
     }
     function shopDetails($id)
     {
-       
+
         $product = tbl_product::where('product_id', $id)->get();
         return view('website.pages.shopDetails', compact('product'));
     }
@@ -69,12 +69,28 @@ class WebsiteController extends Controller
 
     function addToChackout(Request $request)
     {
+
+
+        return redirect('/chackout');
+    }
+    function placeOrder(Request $request)
+    {
+        if ($request->streetAddress == "") {
+            return redirect("/chackout")->with("error", "Street Address id required!");
+        }
+        if ($request->pinCode == "") {
+            return redirect("/chackout")->with("error", "Pin Code is required!");
+        }
+
         $orderMaster = new tbl_order_master();
         $orderMaster->order_master_user_id = $request->userId;
         $orderMaster->order_master_total = $request->totalAmount;
         $orderMaster->order_master_paymentstatus = "Pending";
         $orderMaster->order_master_paymentmethod = "cash on delivery ";
         $orderMaster->order_master_orderstatus = "Processing";
+        $orderMaster->order_master_shipping_address = $request->streetAddress;
+        $orderMaster->order_master_shipping_pincode = $request->pinCode;
+        $orderMaster->order_master_receiver_name = $request->receiverName;
         $orderMaster->save();
         // Get all cart items of user
         $cartItems = tbl_cart::where('cart_user_id', $request->userId)->get();
@@ -94,20 +110,11 @@ class WebsiteController extends Controller
             $orderChild->save();
         }
 
-        return redirect('/chackout');
-    }
-    function placeOrder(Request $request)
-    {
-        if($request->streetAddress == ""){
-            return redirect("/chackout")->with("error","Street Address id required!");
-        }
-        if($request->pinCode == ""){
-            return redirect("/chackout")->with("error","Pin Code is required!");
-        }
         $shipping = new tbl_shipping();
         $shipping->shipping_user_id = $request->userId;
         $shipping->shipping_address = $request->streetAddress;
         $shipping->shipping_pin_code = $request->pinCode;
+        $shipping->shipping_receiver_name = $request->receiverName;
         $shipping->save();
         $cart = tbl_cart::where('cart_user_id', $request->userId)->get();
         foreach ($cart as $item) {
@@ -205,10 +212,23 @@ class WebsiteController extends Controller
 
     function addToWishlist(Request $request)
     {
-        $wishlist = new tbl_wishlist();
-        $wishlist->wishlist_product_id = $request->productId;
-        $wishlist->wishlist_user_id = $request->userId;
-        $wishlist->save();
+        $userId = Auth::id();
+        $productId = $request->productId;
+
+        $exists = tbl_wishlist::where('wishlist_user_id', $userId)
+            ->where('wishlist_product_id', $productId)
+            ->exists();
+
+        if ($exists) {
+            return redirect('/wishlist')->with('error', 'Product already in wishlist');
+        }
+        if (!$exists) {
+            tbl_wishlist::create([
+                'wishlist_user_id' => $userId,
+                'wishlist_product_id' => $productId,
+            ]);
+        }
+
         return redirect('/wishlist');
     }
 

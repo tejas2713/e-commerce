@@ -17,6 +17,9 @@ return new class extends Migration {
             $table->string('order_master_paymentstatus')->nullable();
             $table->string('order_master_paymentmethod')->nullable();
             $table->string('order_master_orderstatus')->nullable();
+            $table->string('order_master_shipping_address')->nullable();
+            $table->string('order_master_shipping_pincode')->nullable();
+            $table->string('order_master_receiver_name')->nullable();
             $table->timestamps();
         });
     }

@@ -27,8 +27,8 @@
                     <div class="alert alert-danger">
                         {{ session("error") }}
                     </div>
-                
-                @endif    
+
+                @endif
                 <form action="/placeOrder" method="POST">
                     @csrf
                     <div class="row">
@@ -39,11 +39,16 @@
 
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
-                                <input value="{{ old("streetAddress") }}" type="text" placeholder="Street Address" name="streetAddress" class="checkout__input__add">
+                                <input value="{{ old("streetAddress") }}" type="text" placeholder="Street Address"
+                                    name="streetAddress" class="checkout__input__add">
                             </div>
                             <div class="checkout__input">
                                 <p>Postcode / ZIP<span>*</span></p>
                                 <input type="text" placeholder="Pin Code" name="pinCode">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Reciver Name<span>*</span></p>
+                                <input type="text" placeholder="Receiver Name" name="receiverName">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
@@ -84,6 +89,15 @@
                                 </div>
 
                                 <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                                @foreach ($cart as $item)
+                                    <input type="hidden" name="productId" value="{{ $item->cart_product_id }}">
+                                    <input type="hidden" name="price" value="{{ $item->cart_price }}">
+                                    <input type="hidden" name="quantity" value="{{ $item->cart_quantity }}">
+                                    <input type="hidden" name="total" value="{{ $item->cart_total }}">
+                                    <input type="hidden" name="userId" value="{{$item->cart_user_id}}">
+                                    <input type="hidden" name="totalAmount" value="{{$cart->sum('cart_total')}}">
+
+                                @endforeach
                                 <!-- <input type="hidden" name="total" value=" {{ $cart->sum('product_mrp') }} "> -->
                                 <button type="submit" class="site-btn">PLACE ORDER</button>
 
