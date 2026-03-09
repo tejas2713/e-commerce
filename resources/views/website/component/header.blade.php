@@ -85,7 +85,7 @@
                         <li><a href="#">Pages</a>
                             <ul class="dropdown">
                                 <li><a href="/about">About Us</a></li>
-                                <li><a href="/shopDetails">Shop Details</a></li>
+                                <li><a href="/shopDetails/{id}">Shop Details</a></li>
                                 <li><a href="/shoppingCard">Shopping Cart</a></li>
                                 <li><a href="/chackout">Check Out</a></li>
                                 <li><a href="/blogDetails">Blog Details</a></li>

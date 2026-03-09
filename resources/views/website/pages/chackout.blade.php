@@ -8,8 +8,8 @@
                     <div class="breadcrumb__text">
                         <h4>Check Out</h4>
                         <div class="breadcrumb__links">
-                            <a href="/master">Home</a>
-                            <a href="/master/shop">Shop</a>
+                            <a href="/">Home</a>
+                            <a href="/shop">Shop</a>
                             <span>Check Out</span>
                         </div>
                     </div>
