@@ -35,7 +35,7 @@
                                     </tr>
                                     <tr>
                                         <th class="bg-success">Shopping Address</th>
-                                        <td class="w-50">2</td>
+                                        <td class="w-50">{{ $ordermaster->order_master_shipping_address }}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -56,7 +56,7 @@
                                     </tr>
                                     <tr>
                                         <th class="bg-success">Reciver Name</th>
-                                        <td class="w-50">2</td>
+                                        <td class="w-50">{{ $ordermaster->order_master_receiver_name }}</td>
                                     </tr>
                                 </table>
                             </div>
