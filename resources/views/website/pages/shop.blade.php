@@ -87,8 +87,8 @@
                                     <form method="GET" action="/shop">
                                         <select name="price" onchange="this.form.submit()">
                                             <option value="">All Price</option>
-                                            <option value="0-55">₹0 - ₹55</option>
-                                            <option value="55-100">₹55 - ₹100</option>
+                                            <option value="0-550">₹0 - ₹550</option>
+                                            <option value="551-1000">₹551 - ₹1000</option>
                                         </select>
                                     </form>
                                 </div>
@@ -101,7 +101,7 @@
                                 <div class="product__item sale">
                                     <a href="/shopDetails/{{$item->product_id}}">
                                         <div class="product__item__pic set-bg"
-                                            data-setbg="{{ asset('uplode/product/' . $item->product_image) }}">
+                                            data-setbg="{{ asset('uplode/product/' . explode(',', $item->product_image)[0]) }}">
                                             <span class="label">Details</span>
                                             <ul class="product__hover">
                                                 <form action="/wishlist" method="post">

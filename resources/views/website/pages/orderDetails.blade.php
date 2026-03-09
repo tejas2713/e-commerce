@@ -43,7 +43,7 @@
                                     <tr>
                                         <td class="product__cart__item">
                                             <div class="product__cart__item__pic">
-                                                <img src="{{ asset('uplode/product/' . $item->product_image)}}" alt=""
+                                                <img src="{{ asset('uplode/product/' . explode(',', $item->product_image)[0]) }}" alt=""
                                                     height="120" width="120">
                                             </div>
                                             <div class="product__cart__item__text">
