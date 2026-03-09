@@ -34,7 +34,9 @@
                                             <input type="hidden" name="productId" value="{{ $item->product_id }}">
                                             <input type="hidden" name="userId" value="{{ Auth::user()->id ?? 0 }}">
                                             <li><button type="submit" class="border-0 bg-0"><img
-                                                        src="{{ asset('website/img/icon/heart.png') }}" alt=""></button></li>
+                                                        src="{{ asset('website/img/icon/heart.png') }}"
+                                                        style="{{ in_array($item->product_id, $wishlistIds ?? []) ? 'filter: invert(21%) sepia(95%) saturate(7467%) hue-rotate(356deg);' : '' }}"
+                                                        alt=""></button></li>
                                         </form>
                                         <li><button type="submit" class="border-0 bg-0"><img
                                                     src="{{ asset('website/img/icon/compare.png') }}" alt="">

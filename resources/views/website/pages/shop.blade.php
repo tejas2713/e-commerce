@@ -94,7 +94,7 @@
                         @foreach ($product as $item)
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="product__item sale">
-                                      <a href="/shopDetails/{{$item->product_id}}">
+                                    <a href="/shopDetails/{{$item->product_id}}">
                                         <div class="product__item__pic set-bg"
                                             data-setbg="{{ asset('uplode/product/' . $item->product_image) }}">
                                             <span class="label">Details</span>
@@ -105,7 +105,9 @@
                                                     <input type="hidden" name="userId" value="{{ Auth::user()->id ?? 0 }}">
 
                                                     <li><button type="submit" class="border-0 bg-0"><img
-                                                                src="{{ asset('website/img/icon/heart.png') }}" alt=""></button>
+                                                                src="{{ asset('website/img/icon/heart.png') }}"
+                                                                style="{{ in_array($item->product_id, $wishlistIds ?? []) ? 'filter: invert(21%) sepia(95%) saturate(7467%) hue-rotate(356deg);' : '' }}"
+                                                                alt=""></button>
                                                     </li>
                                                 </form>
                                                 <li><button type="submit" class="border-0 bg-0"><img

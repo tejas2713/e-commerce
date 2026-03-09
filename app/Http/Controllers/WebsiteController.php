@@ -24,7 +24,10 @@ class WebsiteController extends Controller
             return view('admin.pages.index');
         } else {
             $product = tbl_product::all();
-            return view('website.pages.index', compact('product'));
+            $wishlistIds = tbl_wishlist::where('wishlist_user_id', Auth::id())
+                ->pluck('wishlist_product_id')
+                ->toArray();
+            return view('website.pages.index', compact('product', 'wishlistIds'));
         }
     }
     function shop()
@@ -32,11 +35,16 @@ class WebsiteController extends Controller
         $product = tbl_product::all();
         $category = tbl_category::all();
         $subCategory = tbl_subcategory::all();
-        return view('website.pages.shop', compact('product', 'category', 'subCategory'));
+        $wishlistIds = tbl_wishlist::where('wishlist_user_id', Auth::id())
+            ->pluck('wishlist_product_id')
+            ->toArray();
+        return view('website.pages.shop', compact('product', 'category', 'subCategory', 'wishlistIds'));
     }
     function shopingCard()
     {
-
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
         $cart = DB::table('tbl_cart')
             ->join('tbl_product', 'tbl_cart.cart_product_id', '=', 'tbl_product.product_id')
             ->where('tbl_cart.cart_user_id', Auth::user()->id)
@@ -56,6 +64,9 @@ class WebsiteController extends Controller
     }
     function chackout()
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
         $cart = DB::table('tbl_cart')
             ->join('tbl_product', 'tbl_cart.cart_product_id', '=', 'tbl_product.product_id')
             ->where('tbl_cart.cart_user_id', Auth::user()->id)
@@ -69,12 +80,17 @@ class WebsiteController extends Controller
 
     function addToChackout(Request $request)
     {
-
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
 
         return redirect('/chackout');
     }
     function placeOrder(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
         if ($request->streetAddress == "") {
             return redirect("/chackout")->with("error", "Street Address id required!");
         }
@@ -141,6 +157,9 @@ class WebsiteController extends Controller
 
     function editProfile(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
         $user = auth()->user();
         return view('website.pages.editProfile', compact('user'));
     }
@@ -160,6 +179,9 @@ class WebsiteController extends Controller
 
     function addToCart(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
         $product = tbl_product::find($request->productId);
         $cart = new tbl_cart();
         $cart->cart_product_id = $request->productId;
@@ -186,7 +208,9 @@ class WebsiteController extends Controller
 
     function removeFromCart(Request $request)
     {
-
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
         $cart = tbl_cart::find($request->cartId);
         $cart->delete();
         return redirect('/shoppingCard');
@@ -212,6 +236,9 @@ class WebsiteController extends Controller
 
     function addToWishlist(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
         $userId = Auth::id();
         $productId = $request->productId;
 
@@ -234,6 +261,9 @@ class WebsiteController extends Controller
 
     function removeFromWishlist(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
         $wishlist = tbl_wishlist::find($request->wishlistId);
         $wishlist->delete();
         return redirect('/wishlist');
