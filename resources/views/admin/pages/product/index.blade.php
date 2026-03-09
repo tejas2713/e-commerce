@@ -53,7 +53,7 @@
                                     <tr>
                                         <td>{{$data->product_id }}</td>
 
-                                        <td><img src="{{ asset('uplode/product/' . $data->product_image) }}" alt=""
+                                        <td><img src="{{ asset('uplode/product/' . explode(",",$data->product_image)[0]) }}" alt=""
                                                 style="height:100px; width:100px" class="rounded-4"></td>
                                         <td>{{$data->product_name}}</td>
                                         <td>{{ $data->tax_name }}</td>

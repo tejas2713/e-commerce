@@ -40,8 +40,10 @@
                                         <div class="card-body">
                                             <div class="shop__sidebar__categories">
                                                 <ul class="nice-scroll">
+                                                        <li><a href="/shop">All Categories</a></li>
                                                     @foreach ($category as $item)
-                                                        <li><a href="#">{{ $item->category_name }} (20)</a></li>
+                                                        <li><a href="/shop?category_id={{ $item->category_id }}">{{ $item->category_name }}
+                                                                (20)</a></li>
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -56,8 +58,9 @@
                                         <div class="card-body">
                                             <div class="shop__sidebar__brand">
                                                 <ul>
+                                                    <li><a href="/shop">All Sub Categories</a></li>
                                                     @foreach ($subCategory as $data)
-                                                        <li><a href="#">{{ $data->sub_category_name }} (20)</a></li>
+                                                        <li><a href="/shop?subcategory_id={{ $data->sub_category_id }}">{{ $data->sub_category_name }} (20)</a></li>
                                                     @endforeach
 
                                                 </ul>
@@ -81,11 +84,13 @@
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="shop__product__option__right">
                                     <p>Sort by Price:</p>
-                                    <select>
-                                        <option value="">Low To High</option>
-                                        <option value="">₹0 - ₹55</option>
-                                        <option value="">₹55 - ₹100</option>
-                                    </select>
+                                    <form method="GET" action="/shop">
+                                        <select name="price" onchange="this.form.submit()">
+                                            <option value="">All Price</option>
+                                            <option value="0-55">₹0 - ₹55</option>
+                                            <option value="55-100">₹55 - ₹100</option>
+                                        </select>
+                                    </form>
                                 </div>
                             </div>
                         </div>

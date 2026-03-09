@@ -150,7 +150,7 @@
 
                                 <div class="form-group">
                                     <label for="productImage">Product Image</label>
-                                    <input type="file" id="productImage" name="productImage" class="form-control">
+                                    <input type="file" id="productImage" name="productImage[]" multiple class="form-control">
                                 </div>
                             </div>
                         </div>

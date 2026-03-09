@@ -30,11 +30,35 @@ class WebsiteController extends Controller
             return view('website.pages.index', compact('product', 'wishlistIds'));
         }
     }
-    function shop()
+    function shop(Request $request)
     {
-        $product = tbl_product::all();
+
         $category = tbl_category::all();
         $subCategory = tbl_subcategory::all();
+        $query = tbl_product::query();
+
+        // Category filter
+        if ($request->category_id) {
+            $query->where('product_category_id', $request->category_id);
+        }
+
+        // SubCategory filter
+        if ($request->subcategory_id) {
+            $query->where('product_sub_category_id', $request->subcategory_id);
+        }
+        // Price filter
+        if ($request->price) {
+
+            if ($request->price == "0-55") {
+                $query->whereBetween('product_sale', [0, 55]);
+            }
+
+            if ($request->price == "55-100") {
+                $query->whereBetween('product_sale', [55, 100]);
+            }
+
+        }
+        $product = $query->get();
         $wishlistIds = tbl_wishlist::where('wishlist_user_id', Auth::id())
             ->pluck('wishlist_product_id')
             ->toArray();

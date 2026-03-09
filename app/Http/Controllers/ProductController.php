@@ -33,6 +33,7 @@ class ProductController extends Controller
         $subcategory = tbl_subcategory::all();
         $tax = tbl_tax::all();
         $unit = tbl_unit::all();
+       
 
         return view('admin.pages.product.index', compact("product", "category", "subcategory", "tax", "unit"));
     }
@@ -40,11 +41,16 @@ class ProductController extends Controller
     {
         $product = new tbl_product();
         $path = public_path('uplode/product');
+        $names = "";
         $productimage = $request->file('productImage');
-        $productImageName = "";
-        if ($productimage) {
-            $productImageName = time() . "_" . $productimage->getClientOriginalName();
-            $productimage->move($path, $productImageName);
+        for ($i = 0; $i < count($productimage); $i++) {
+            # code...
+            $productImageName = "";
+            if ($productimage) {
+                $productImageName = time() . "_" . $productimage[$i]->getClientOriginalName();
+                $productimage[$i]->move($path, $productImageName);
+                $names .= $productImageName . ",";
+            }
         }
         $product->product_name = $request->productName;
         $product->product_hsn = $request->hsn;
@@ -63,7 +69,7 @@ class ProductController extends Controller
         $product->product_distributer = $request->distributor_price;
         $product->product_op_qty = $request->opening_qty;
         $product->product_op_value = $request->opening_value;
-        $product->product_image = $productImageName;
+        $product->product_image = $names;
         $product->save();
         return redirect("/admin/product")->with("success", "Product Added Successfully");
     }
