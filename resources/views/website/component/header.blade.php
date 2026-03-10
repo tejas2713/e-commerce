@@ -98,10 +98,19 @@
             </div>
             <div class="col-lg-3 col-md-3">
                 <div class="header__nav__option">
-                    <a href="#" class="search-switch"><img src="{{ asset('website/img/icon/search.png') }}" alt=""></a>
-                    <a href="/wishlist"><img src="{{ asset('website/img/icon/heart.png') }}" alt=""></a>
-                    <a href="/order"><img src="{{ asset('website/img/icon/cart.png') }}" alt=""> <span>0</span></a>
-                    <div class="price">₹ 0.00</div>
+                    <a href="#" class="btn btn-light btn-sm  shadow-sm">
+                        <i class="fa fa-search fa-lg"></i>
+                    </a>
+                    <a href="/wishlist" class="btn btn-light btn-sm  shadow-sm">
+                        <i class="fa fa-heart text-danger fa-lg"></i>
+                    </a>
+                    <a href="/order" class="btn btn-light btn-sm  shadow-sm">
+                        <i class="fa fa-shopping-bag fa-lg"></i>
+                    </a>
+                    <a href="/shoppingCard" class="btn btn-light btn-sm  shadow-sm">
+                        <i class="fa fa-shopping-cart fa-lg"></i>
+                    </a>
+                    <!-- <div class="price">₹ 0.00</div> -->
 
 
 

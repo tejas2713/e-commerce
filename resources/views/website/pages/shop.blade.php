@@ -89,6 +89,7 @@
                                             <option value="">All Price</option>
                                             <option value="0-550">₹0 - ₹550</option>
                                             <option value="551-1000">₹551 - ₹1000</option>
+                                            <option value="1001-5000">₹1001 - ₹5000</option>
                                         </select>
                                     </form>
                                 </div>
@@ -109,18 +110,14 @@
                                                     <input type="hidden" name="productId" value="{{ $item->product_id }}">
                                                     <input type="hidden" name="userId" value="{{ Auth::user()->id ?? 0 }}">
 
-                                                    <li><button type="submit" class="border-0 bg-0"><img
-                                                                src="{{ asset('website/img/icon/heart.png') }}"
-                                                                style="{{ in_array($item->product_id, $wishlistIds ?? []) ? 'filter: invert(21%) sepia(95%) saturate(7467%) hue-rotate(356deg);' : '' }}"
-                                                                alt=""></button>
+                                                    <li><button type="submit" class="wishlist-btn rounded-circle">
+                                                            <i class="{{ in_array($item->product_id,$wishlistIds) 
+                                                                    ? 'fa fa-heart text-danger' 
+                                                                    : 'fa fa-heart text-dark' }}"></i>
+                                                        </button>
                                                     </li>
                                                 </form>
-                                                <li><button type="submit" class="border-0 bg-0"><img
-                                                            src="{{ asset('website/img/icon/compare.png') }}" alt="">
-                                                        <span>Compare</span></button></li>
-                                                <li><button type="submit" class="border-0 bg-0"><img
-                                                            src="{{ asset('website/img/icon/search.png') }}" alt=""></button>
-                                                </li>
+                                               
                                             </ul>
                                         </div>
                                     </a>

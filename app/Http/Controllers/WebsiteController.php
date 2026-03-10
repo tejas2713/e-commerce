@@ -29,6 +29,7 @@ class WebsiteController extends Controller
                 ->toArray();
             return view('website.pages.index', compact('product', 'wishlistIds'));
         }
+        
     }
     function shop(Request $request)
     {
@@ -49,12 +50,16 @@ class WebsiteController extends Controller
         // Price filter
         if ($request->price) {
 
-            if ($request->price == "0-55") {
-                $query->whereBetween('product_sale', [0, 55]);
+            if ($request->price == "0-550") {
+                $query->whereBetween('product_sale', [0, 550]);
             }
 
-            if ($request->price == "55-100") {
-                $query->whereBetween('product_sale', [55, 100]);
+            if ($request->price == "551-1000") {
+                $query->whereBetween('product_sale', [551, 1000]);
+            }
+
+            if ($request->price == "1001-5000") {
+                $query->whereBetween('product_sale', [1001, 5000]);
             }
 
         }
