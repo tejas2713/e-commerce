@@ -22,62 +22,59 @@
             </div>
             <div class="row product__filter">
                 @foreach ($product as $item)
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix ">
-                        <div class="product__item">
-                            <a href="/shopDetails/{{$item->product_id}}">
-                                <div class="product__item__pic set-bg"
-                                    data-setbg="{{ asset('uplode/product/' . explode(',', $item->product_image)[0]) }}">
-                                    <span class="label">Details</span>
-                                    <ul class="product__hover">
-                                        <form action="/wishlist" method="post">
-                                            @csrf
-                                            <input type="hidden" name="productId" value="{{ $item->product_id }}">
-                                            <input type="hidden" name="userId" value="{{ Auth::user()->id ?? 0 }}">
-                                            <li><button type="submit" class="border-0 bg-0"><img
-                                                        src="{{ asset('website/img/icon/heart.png') }}"
-                                                        style="{{ in_array($item->product_id, $wishlistIds ?? []) ? 'filter: invert(21%) sepia(95%) saturate(7467%) hue-rotate(356deg);' : '' }}"
-                                                        alt=""></button></li>
-                                        </form>
-                                        <li><button type="submit" class="border-0 bg-0"><img
-                                                    src="{{ asset('website/img/icon/compare.png') }}" alt="">
-                                                <span>Compare</span></button></li>
-                                        <li><button type="submit" class="border-0 bg-0"><img
-                                                    src="{{ asset('website/img/icon/search.png') }}" alt=""></button></li>
-                                    </ul>
-                                </div>
-                            </a>
-                            <div class="product__item__text">
-                                <h6>{{ $item->product_name }}</h6>
-                                <form action="/add-to-cart" method="post">
-                                    @csrf
-                                    <input type="hidden" name="productId" value="{{ $item->product_id  }}">
-                                    <input type="hidden" name="userId" value="{{ Auth::user()->id ?? 0 }}">
-                                    <input type="hidden" name="quantity" value="1">
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix ">
+                            <div class="product__item">
+                                <a href="/shopDetails/{{$item->product_id}}">
+                                    <div class="product__item__pic set-bg"
+                                        data-setbg="{{ asset('uplode/product/' . explode(',', $item->product_image)[0]) }}">
+                                        <span class="label">Details</span>
+                                        <ul class="product__hover">
+                                            <form action="/wishlist" method="post">
+                                                @csrf
+                                                <input type="hidden" name="productId" value="{{ $item->product_id }}">
+                                                <input type="hidden" name="userId" value="{{ Auth::user()->id ?? 0 }}">
+                                                <li><button type="submit" class="wishlist-btn border-0 bg-0">
+                                                        <i class="{{ in_array($item->product_id, $wishlistIds)
+                                                            ? 'fa fa-heart text-danger'
+                                                            : 'fa fa-heart text-dark' }}"></i>
+                                                    </button>
+                                                </li>
+                                            </form>
+                                        </ul>
+                                    </div>
+                                </a>
+                                <div class="product__item__text">
+                                    <h6>{{ $item->product_name }}</h6>
+                                    <form action="/add-to-cart" method="post">
+                                        @csrf
+                                        <input type="hidden" name="productId" value="{{ $item->product_id  }}">
+                                        <input type="hidden" name="userId" value="{{ Auth::user()->id ?? 0 }}">
+                                        <input type="hidden" name="quantity" value="1">
 
-                                    <button type="submit" class="border-0 bg-0">+ Add To Cart</button>
-                                </form>
-                                <div class="rating">
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </div>
-                                <h5>₹{{ $item->product_sale}}</h5>
-                                <div class="product__color__select">
-                                    <label for="pc-1">
-                                        <input type="radio" id="pc-1">
-                                    </label>
-                                    <label class="active black" for="pc-2">
-                                        <input type="radio" id="pc-2">
-                                    </label>
-                                    <label class="grey" for="pc-3">
-                                        <input type="radio" id="pc-3">
-                                    </label>
+                                        <button type="submit" class="border-0 bg-0">+ Add To Cart</button>
+                                    </form>
+                                    <div class="rating">
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <h5>₹{{ $item->product_sale}}</h5>
+                                    <div class="product__color__select">
+                                        <label for="pc-1">
+                                            <input type="radio" id="pc-1">
+                                        </label>
+                                        <label class="active black" for="pc-2">
+                                            <input type="radio" id="pc-2">
+                                        </label>
+                                        <label class="grey" for="pc-3">
+                                            <input type="radio" id="pc-3">
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 @endforeach
 
             </div>

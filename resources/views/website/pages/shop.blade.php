@@ -110,7 +110,7 @@
                                                     <input type="hidden" name="productId" value="{{ $item->product_id }}">
                                                     <input type="hidden" name="userId" value="{{ Auth::user()->id ?? 0 }}">
 
-                                                    <li><button type="submit" class="wishlist-btn rounded-circle">
+                                                    <li><button type="submit" class="wishlist-btn border-0 bg-0">
                                                             <i class="{{ in_array($item->product_id,$wishlistIds) 
                                                                     ? 'fa fa-heart text-danger' 
                                                                     : 'fa fa-heart text-dark' }}"></i>
