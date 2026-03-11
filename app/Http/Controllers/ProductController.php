@@ -79,6 +79,6 @@ class ProductController extends Controller
 
         $product = tbl_product::find($request->product_id);
         $product->delete();
-        return redirect('/adminproduct')->with("Delete", "Product Deleted Successfully");
+        return redirect('/admin/product')->with("Delete", "Product Deleted Successfully");
     }
 }

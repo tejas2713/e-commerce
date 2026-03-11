@@ -26,7 +26,7 @@
                             <div class="product__item">
                                 <a href="/shopDetails/{{$item->product_id}}">
                                     <div class="product__item__pic set-bg"
-                                        data-setbg="{{ asset('uplode/product/' . explode(',', $item->product_image)[0]) }}">
+                                        data-setbg="{{ asset('uplode/product/' . json_decode( $item->product_image)[0]) }}">
                                         <span class="label">Details</span>
                                         <ul class="product__hover">
                                             <form action="/wishlist" method="post">

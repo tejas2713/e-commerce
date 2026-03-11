@@ -54,7 +54,7 @@
                                         <td>{{$data->product_id }}</td>
 
                                         <td>
-                                            <img src="{{ asset('uplode/product/' . (json_decode($data->product_image)[0] ?? 'no-image.png')) }}"
+                                            <img src="{{ asset('uplode/product/' . json_decode( $data->product_image)[0]) }}"
                                                 style="height:100px;width:100px" class="rounded-4">
                                         </td>
                                         <td>{{$data->product_name}}</td>
