@@ -41,7 +41,7 @@ class ProductController extends Controller
     {
         $product = new tbl_product();
         $path = public_path('uplode/product');
-        $names = "";
+        $names = [];
         $productimage = $request->file('productImage');
         for ($i = 0; $i < count($productimage); $i++) {
             # code...
@@ -49,7 +49,7 @@ class ProductController extends Controller
             if ($productimage) {
                 $productImageName = time() . "_" . $productimage[$i]->getClientOriginalName();
                 $productimage[$i]->move($path, $productImageName);
-                $names .= $productImageName . ",";
+                $names[]= $productImageName ;
             }
         }
         $product->product_name = $request->productName;
@@ -69,7 +69,7 @@ class ProductController extends Controller
         $product->product_distributer = $request->distributor_price;
         $product->product_op_qty = $request->opening_qty;
         $product->product_op_value = $request->opening_value;
-        $product->product_image = $names;
+        $product->product_image = json_encode($names);
         $product->save();
         return redirect("/admin/product")->with("success", "Product Added Successfully");
     }
@@ -79,6 +79,6 @@ class ProductController extends Controller
 
         $product = tbl_product::find($request->product_id);
         $product->delete();
-        return redirect('/admin/product')->with("Delete", "Product Deleted Successfully");
+        return redirect('/adminproduct')->with("Delete", "Product Deleted Successfully");
     }
 }

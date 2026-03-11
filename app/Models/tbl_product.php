@@ -8,4 +8,7 @@ class tbl_product extends Model
 {
     protected $table = "tbl_product";
     protected $primaryKey = "product_id";
+    protected $casts = [
+        'product_image' => 'array',
+    ];
 }

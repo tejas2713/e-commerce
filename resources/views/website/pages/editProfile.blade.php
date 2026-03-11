@@ -1,57 +1,58 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Edit Profile</div>
+            <div class="col-lg-6">
 
-                    <div class="card-body">
-                    
+                <div class="card shadow border-0">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h5 class="mb-0">Edit Profile</h5>
+                    </div>
+
+                    <div class="card-body p-4">
+
                         <form method="post" action="/updateProfile">
                             @csrf
-                            <input type="hidden" id="userId" name="userId" value="{{ Auth::user()->id }}" >
-                            <div class="row mb-3">
-                                <label for="userName" class="col-md-4 col-form-label text-md-end">Name</label>
 
-                                <div class="col-md-6">
-                                    <input id="userName" type="text" class="form-control @error('name') is-invalid @enderror"
-                                        name="userName" value="{{ old('name') ?? Auth::user()->name }}" required autocomplete="name" autofocus>
+                            <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
 
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Name</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="fa fa-user"></i>
+                                    </span>
+
+                                    <input type="text" class="form-control" name="userName"
+                                        value="{{ old('name') ?? Auth::user()->name }}" required>
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <label for="userEmail" class="col-md-4 col-form-label text-md-end">Email Address</label>
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Email Address</label>
 
-                                <div class="col-md-6">
-                                    <input id="userEmail" type="email" class="form-control @error('email') is-invalid @enderror"
-                                        name="userEmail" value="{{ old('email') ?? Auth::user()->email }}" required autocomplete="email">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
 
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <input type="email" class="form-control" name="userEmail"
+                                        value="{{ old('email') ?? Auth::user()->email }}" required>
                                 </div>
                             </div>
 
-                            <div class="row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Update Profile
-                                    </button>
-                                </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary px-4">
+                                    <i class="fa fa-save"></i> Update Profile
+                                </button>
                             </div>
+
                         </form>
+
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
